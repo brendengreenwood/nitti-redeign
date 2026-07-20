@@ -33,10 +33,10 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/sign-up"
+            href="/welcome"
             className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
           >
-            Sign Up
+            Get Started
           </Link>
           <Link
             href="/book"
@@ -128,11 +128,11 @@ export default function Nav() {
               Book a Pickup
             </Link>
             <Link
-              href="/sign-up"
+              href="/welcome"
               onClick={() => setOpen(false)}
               className="rounded-lg border border-gray-600 px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-gray-300"
             >
-              Sign Up for Weekly Service
+              New House? Get Started
             </Link>
             <a
               href={COMPANY.paymentPortalUrl}

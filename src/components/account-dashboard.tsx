@@ -16,15 +16,28 @@ import {
   parseBookings,
   type StoredBooking,
 } from "@/lib/bookings";
+import {
+  AUTOPAY_KEY,
+  LOGIN_FLAG_KEY,
+  PLAN_KEY,
+  parseAutopay,
+  parsePlan,
+  parseSession,
+  type Autopay,
+} from "@/lib/session";
 
 const CITY_STORAGE_KEY = "nitti-selected-city";
 
-// Hydration-safe localStorage reads (server renders the signed-out-ish shell,
+// Hydration-safe localStorage reads (server renders the logged-out shell,
 // client fills in the household's data after hydration).
 const emptySubscribe = () => () => {};
 const getSavedCity = () => localStorage.getItem(CITY_STORAGE_KEY);
 const getSavedHouseName = () => localStorage.getItem(HOUSE_NAME_KEY);
 const getSavedBookings = () => localStorage.getItem(BOOKINGS_KEY);
+const getSavedSession = () => localStorage.getItem("nitti-session");
+const getLoginFlag = () => localStorage.getItem(LOGIN_FLAG_KEY);
+const getSavedPlan = () => localStorage.getItem(PLAN_KEY);
+const getSavedAutopay = () => localStorage.getItem(AUTOPAY_KEY);
 const serverNull = () => null;
 
 function formatDate(iso: string | Date): string {
@@ -37,6 +50,23 @@ function formatDate(iso: string | Date): string {
 }
 
 export default function AccountDashboard() {
+  // Session: the household record plus a separate logged-in flag, so logging
+  // out never erases the household.
+  const sessionRaw = useSyncExternalStore(emptySubscribe, getSavedSession, serverNull);
+  const loginFlag = useSyncExternalStore(emptySubscribe, getLoginFlag, serverNull);
+  const [loggedOut, setLoggedOut] = useState(false);
+  const session =
+    loggedOut || loginFlag !== "1" ? null : parseSession(sessionRaw);
+
+  // Plan & autopay
+  const planRaw = useSyncExternalStore(emptySubscribe, getSavedPlan, serverNull);
+  const plan = parsePlan(planRaw);
+  const autopayRaw = useSyncExternalStore(emptySubscribe, getSavedAutopay, serverNull);
+  const [autopayOverride, setAutopayOverride] = useState<Autopay | null>(null);
+  const autopay = autopayOverride ?? parseAutopay(autopayRaw);
+  const [enablingAutopay, setEnablingAutopay] = useState(false);
+  const [cardDraft, setCardDraft] = useState("");
+
   // City (shared with the finder & wizard)
   const savedCityRaw = useSyncExternalStore(emptySubscribe, getSavedCity, serverNull);
   const [chosenCity, setChosenCity] = useState<CityKey | null>(null);
@@ -47,30 +77,21 @@ export default function AccountDashboard() {
       : null);
   const cityInfo = SERVICE_CITIES.find((c) => c.key === city);
 
-  // House nickname — it's their first house; let them put a name on the door
-  const savedHouseName = useSyncExternalStore(
-    emptySubscribe,
-    getSavedHouseName,
-    serverNull
-  );
+  // House nickname
+  const savedHouseName = useSyncExternalStore(emptySubscribe, getSavedHouseName, serverNull);
   const [nameOverride, setNameOverride] = useState<string | null>(null);
   const [editingName, setEditingName] = useState(false);
   const [nameDraft, setNameDraft] = useState("");
   const houseName = nameOverride ?? savedHouseName;
 
   // Bookings made through the wizard
-  const bookingsRaw = useSyncExternalStore(
-    emptySubscribe,
-    getSavedBookings,
-    serverNull
-  );
-  const [bookingsOverride, setBookingsOverride] = useState<StoredBooking[] | null>(
-    null
-  );
+  const bookingsRaw = useSyncExternalStore(emptySubscribe, getSavedBookings, serverNull);
+  const [bookingsOverride, setBookingsOverride] = useState<StoredBooking[] | null>(null);
   const bookings = bookingsOverride ?? parseBookings(bookingsRaw);
 
   const nextPickup = cityInfo ? getNextPickupDate(cityInfo.pickupDays) : null;
   const holiday = getUpcomingHoliday(7);
+  const firstName = session?.name?.trim().split(/\s+/)[0] || null;
 
   function commitHouseName() {
     const trimmed = nameDraft.trim();
@@ -92,13 +113,58 @@ export default function AccountDashboard() {
     localStorage.setItem(CITY_STORAGE_KEY, key);
   }
 
+  function enableAutopay() {
+    const digits = cardDraft.replace(/\D/g, "");
+    if (digits.length < 12) return;
+    const next: Autopay = { enabled: true, last4: digits.slice(-4) };
+    localStorage.setItem(AUTOPAY_KEY, JSON.stringify(next));
+    setAutopayOverride(next);
+    setEnablingAutopay(false);
+    setCardDraft("");
+  }
+
+  function logOut() {
+    localStorage.removeItem(LOGIN_FLAG_KEY);
+    setLoggedOut(true);
+  }
+
+  // ---------- Logged out ----------
+  if (!session) {
+    return (
+      <div className="mx-auto max-w-sm px-4 py-16 text-center">
+        <p className="text-4xl">🏡</p>
+        <h1 className="mt-4 font-slab text-2xl font-bold text-white">
+          My Nitti
+        </h1>
+        <p className="mt-2 text-sm text-gray-400">
+          Trash day, pickups, and the bill — your whole house, one screen.
+        </p>
+        <div className="mt-8 flex flex-col gap-3">
+          <Link
+            href="/login"
+            className="rounded-xl bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+          >
+            Log In
+          </Link>
+          <Link
+            href="/welcome"
+            className="rounded-xl border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
+          >
+            New house? Set up service →
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // ---------- Logged in ----------
   return (
     <div className="mx-auto max-w-lg px-4 py-8">
       {/* Header / house name */}
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-            My Nitti
+            My Nitti{firstName ? ` · hi, ${firstName}` : ""}
           </p>
           {editingName ? (
             <div className="mt-1 flex items-center gap-2">
@@ -178,6 +244,25 @@ export default function AccountDashboard() {
         )}
       </div>
 
+      {/* Current plan */}
+      {plan && (
+        <div className="mt-3 flex items-center justify-between rounded-2xl bg-charcoal-light p-5">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              Your service
+            </p>
+            <p className="mt-1 text-sm font-semibold text-white">
+              {plan.label} cart · weekly
+              {plan.yardWaste && " · 🍂 yard waste pass"}
+            </p>
+          </div>
+          <p className="font-slab text-xl font-bold text-white">
+            ${plan.pricePerMonth}
+            <span className="text-xs font-normal text-gray-500">/mo</span>
+          </p>
+        </div>
+      )}
+
       {/* Quick order — the "honey, can you add a pickup?" row */}
       <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-gray-500">
         Add to a pickup
@@ -243,10 +328,46 @@ export default function AccountDashboard() {
             <p className="text-sm text-gray-400">Current balance</p>
             <p className="font-slab text-2xl font-bold text-white">$0.00</p>
           </div>
-          <span className="rounded-full bg-green-trust px-3 py-1 text-xs font-semibold text-white">
-            Autopay on ✓
-          </span>
+          {autopay?.enabled ? (
+            <span className="rounded-full bg-green-trust px-3 py-1 text-xs font-semibold text-white">
+              Autopay on{autopay.last4 ? ` · •••${autopay.last4}` : ""} ✓
+            </span>
+          ) : (
+            <span className="rounded-full border border-gray-600 px-3 py-1 text-xs font-semibold text-gray-400">
+              Autopay off
+            </span>
+          )}
         </div>
+
+        {!autopay?.enabled &&
+          (enablingAutopay ? (
+            <div className="mt-3 flex gap-2">
+              <input
+                autoFocus
+                type="text"
+                value={cardDraft}
+                onChange={(e) => setCardDraft(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && enableAutopay()}
+                placeholder="Card number (demo — last 4 kept)"
+                inputMode="numeric"
+                className="form-input py-2.5"
+              />
+              <button
+                onClick={enableAutopay}
+                className="shrink-0 rounded-lg bg-gold px-4 py-2 text-xs font-semibold text-charcoal"
+              >
+                Save
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setEnablingAutopay(true)}
+              className="mt-3 w-full rounded-xl border border-gold/50 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
+            >
+              Turn on autopay — stop tracking due dates
+            </button>
+          ))}
+
         <a
           href={COMPANY.paymentPortalUrl}
           target="_blank"
@@ -279,6 +400,14 @@ export default function AccountDashboard() {
         </div>
       </div>
 
+      {/* Household */}
+      {session.partnerPhone && (
+        <p className="mt-4 rounded-xl bg-charcoal-light p-3 text-center text-xs text-gray-500">
+          👫 Two adults on this account — either number logs in and can order
+          pickups.
+        </p>
+      )}
+
       {/* Reliability note */}
       <div className="mt-6 rounded-2xl border border-gray-700 p-5 text-center">
         <p className="font-slab text-lg font-semibold text-white">
@@ -294,10 +423,9 @@ export default function AccountDashboard() {
       </div>
 
       <p className="mt-6 text-center text-xs text-gray-600">
-        Not a customer yet?{" "}
-        <Link href="/sign-up" className="text-gold">
-          Set up service for your place →
-        </Link>
+        <button onClick={logOut} className="underline hover:text-gray-400">
+          Log out
+        </button>
       </p>
     </div>
   );

@@ -135,10 +135,10 @@ export default function Home() {
           </p>
           <div className="mt-5 text-center">
             <Link
-              href="/sign-up"
+              href="/welcome"
               className="inline-block rounded-xl bg-gold px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
             >
-              Make It Official
+              Make It Official — 2 Min Setup
             </Link>
           </div>
         </div>

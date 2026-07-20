@@ -13,8 +13,10 @@ const TABS = [
 export default function TabBar() {
   const pathname = usePathname();
 
-  // The booking wizard has its own sticky action bar — stay out of its way.
-  if (pathname.startsWith("/book")) return null;
+  // The booking and onboarding wizards have their own sticky action bars —
+  // stay out of their way.
+  if (pathname.startsWith("/book") || pathname.startsWith("/welcome"))
+    return null;
 
   return (
     <>
