@@ -223,6 +223,72 @@ export const BULK_ITEMS: BulkItem[] = [
   { key: "other", label: "Something else", emoji: "📦", typicalPrice: 25 },
 ];
 
+/**
+ * Life-moment entry points: nobody wakes up wanting "bulk item pickup" —
+ * something happened at home and now stuff has to go. Each moment maps to a
+ * service with sensible prefills the user can adjust in the wizard.
+ */
+export interface LifeMoment {
+  key: string;
+  emoji: string;
+  label: string;
+  description: string;
+  service: "yard" | "bulk";
+  items?: Record<string, number>;
+  bags?: number;
+}
+
+export const LIFE_MOMENTS: LifeMoment[] = [
+  {
+    key: "outgrown",
+    emoji: "🧸",
+    label: "The kids outgrew it",
+    description: "Crib, bunk bed, swing set, ride-on everything",
+    service: "bulk",
+    items: { mattress: 1, playset: 1 },
+  },
+  {
+    key: "new-furniture",
+    emoji: "📦",
+    label: "New couch is coming",
+    description: "The old one needs to be gone before the delivery truck",
+    service: "bulk",
+    items: { couch: 1 },
+  },
+  {
+    key: "yard-day",
+    emoji: "🍂",
+    label: "Yard day got out of hand",
+    description: "A wall of bags lined up on the driveway",
+    service: "yard",
+    bags: 5,
+  },
+  {
+    key: "appliance-died",
+    emoji: "🧊",
+    label: "An appliance gave up",
+    description: "Fridge, washer, dryer — we haul it, doors off please",
+    service: "bulk",
+    items: { appliance: 1 },
+  },
+  {
+    key: "mattress-upgrade",
+    emoji: "🛏️",
+    label: "Mattress upgrade",
+    description: "The old one's been leaning on the guest room wall",
+    service: "bulk",
+    items: { mattress: 1 },
+  },
+  {
+    key: "garage-purge",
+    emoji: "🚗",
+    label: "Garage purge weekend",
+    description: "The pile that was “going to Goodwill” since 2023",
+    service: "bulk",
+    items: { other: 1 },
+  },
+];
+
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Schedule", href: "/schedule" },

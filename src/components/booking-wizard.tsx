@@ -7,6 +7,7 @@ import {
   BULK_ITEMS,
   BULK_PICKUP,
   COMPANY,
+  LIFE_MOMENTS,
   SERVICE_CITIES,
   YARD_WASTE,
   getNextBulkPickupDate,
@@ -30,6 +31,31 @@ function formatDate(date: Date): string {
   });
 }
 
+// All-day calendar event she can drop straight into the family calendar —
+// the booking shouldn't have to live in her head until pickup day.
+function calendarHref(date: Date, title: string, note: string): string {
+  const fmt = (d: Date) =>
+    `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(
+      d.getDate()
+    ).padStart(2, "0")}`;
+  const dayAfter = new Date(date);
+  dayAfter.setDate(dayAfter.getDate() + 1);
+  const ics = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Nitti Sanitation//Pickup//EN",
+    "BEGIN:VEVENT",
+    `UID:nitti-pickup-${fmt(date)}@nittisanitation.com`,
+    `DTSTART;VALUE=DATE:${fmt(date)}`,
+    `DTEND;VALUE=DATE:${fmt(dayAfter)}`,
+    `SUMMARY:${title}`,
+    `DESCRIPTION:${note}`,
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+  return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+}
+
 // Read the remembered city (shared with the pickup-day finder) without a
 // setState-in-effect: localStorage never changes underneath us in-page, so an
 // empty subscription is enough for hydration-safe reads.
@@ -40,16 +66,22 @@ const getServerCity = () => null;
 export default function BookingWizard() {
   const searchParams = useSearchParams();
   const preselect = searchParams.get("service");
+  const urlMoment =
+    LIFE_MOMENTS.find((m) => m.key === searchParams.get("moment")) ?? null;
 
-  const [service, setService] = useState<ServiceType | null>(
-    preselect === "yard" || preselect === "bulk" ? preselect : null
-  );
-  const [step, setStep] = useState(
-    preselect === "yard" || preselect === "bulk" ? 1 : 0
-  );
+  const initialService: ServiceType | null =
+    urlMoment?.service ??
+    (preselect === "yard" || preselect === "bulk" ? preselect : null);
+
+  const [service, setService] = useState<ServiceType | null>(initialService);
+  const [step, setStep] = useState(initialService ? 1 : 0);
+  const [chosenMoment, setChosenMoment] = useState(urlMoment);
+  const moment = chosenMoment;
   const [chosenCity, setChosenCity] = useState<CityKey | null>(null);
-  const [bagCount, setBagCount] = useState(3);
-  const [items, setItems] = useState<Record<string, number>>({});
+  const [bagCount, setBagCount] = useState(urlMoment?.bags ?? 3);
+  const [items, setItems] = useState<Record<string, number>>(
+    urlMoment?.items ? { ...urlMoment.items } : {}
+  );
   const [otherNote, setOtherNote] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -144,7 +176,7 @@ export default function BookingWizard() {
           ✓
         </div>
         <h1 className="mt-5 font-slab text-3xl font-bold text-white">
-          You&apos;re booked!
+          Done. That&apos;s one less thing.
         </h1>
         <p className="mt-3 text-gray-400">
           {service === "yard" ? (
@@ -190,6 +222,22 @@ export default function BookingWizard() {
             )}
           </ul>
         </div>
+
+        {pickupDate && (
+          <a
+            href={calendarHref(
+              pickupDate,
+              service === "yard"
+                ? "Nitti pickup — yard bags at curb by 6:30 AM"
+                : `Nitti pickup — items at curb by ${BULK_PICKUP.itemsOutBy}`,
+              `Estimated total $${estimate}. Questions? ${COMPANY.phone}`
+            )}
+            download="nitti-pickup.ics"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover sm:w-auto"
+          >
+            📅 Put it on the family calendar
+          </a>
+        )}
 
         <p className="mt-5 text-sm text-gray-500">
           Estimated total:{" "}
@@ -241,19 +289,61 @@ export default function BookingWizard() {
         </button>
       )}
 
+      {moment && step >= 1 && step <= 2 && (
+        <div className="mb-5 flex items-start gap-3 rounded-xl bg-charcoal-light p-3">
+          <span className="text-xl">{moment.emoji}</span>
+          <p className="text-sm text-gray-400">
+            <span className="font-semibold text-white">{moment.label}.</span>{" "}
+            We prefilled the usual suspects — adjust anything, no judgment.
+          </p>
+        </div>
+      )}
+
       {/* Step 0: service */}
       {step === 0 && (
         <div>
           <h1 className="font-slab text-2xl font-bold text-white">
-            What needs to disappear?
+            What happened?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Takes about a minute. No phone call required.
+            Takes about a minute, whether it&apos;s 7 AM or way past bedtime.
           </p>
-          <div className="mt-6 grid gap-4">
+
+          <div className="mt-5 grid gap-2">
+            {LIFE_MOMENTS.map((m) => (
+              <button
+                key={m.key}
+                onClick={() => {
+                  setService(m.service);
+                  setChosenMoment(m);
+                  if (m.items) setItems({ ...m.items });
+                  if (m.bags) setBagCount(m.bags);
+                  setStep(1);
+                }}
+                className="flex items-center gap-3 rounded-xl border border-gray-700 bg-charcoal-light px-4 py-3 text-left transition-colors hover:border-gold active:scale-[0.99]"
+              >
+                <span className="text-2xl">{m.emoji}</span>
+                <span>
+                  <span className="block text-sm font-semibold text-white">
+                    {m.label}
+                  </span>
+                  <span className="block text-xs text-gray-500">
+                    {m.description}
+                  </span>
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-gray-500">
+            Or start from scratch
+          </p>
+          <div className="mt-3 grid gap-4">
             <button
               onClick={() => {
                 setService("yard");
+                setChosenMoment(null);
+                setBagCount(3);
                 setStep(1);
               }}
               className="rounded-2xl border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"
@@ -270,6 +360,8 @@ export default function BookingWizard() {
             <button
               onClick={() => {
                 setService("bulk");
+                setChosenMoment(null);
+                setItems({});
                 setStep(1);
               }}
               className="rounded-2xl border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"

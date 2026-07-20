@@ -3,9 +3,9 @@ import PickupDayFinder from "@/components/pickup-day-finder";
 import {
   BULK_PICKUP,
   COMPANY,
+  LIFE_MOMENTS,
   TESTIMONIALS,
   TRASH_PLANS,
-  YARD_WASTE,
 } from "@/lib/data";
 
 export default function Home() {
@@ -17,53 +17,51 @@ export default function Home() {
       <section className="bg-charcoal px-4 pb-10 pt-14 sm:pb-16 sm:pt-20">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-slab text-4xl font-bold leading-[1.1] text-white sm:text-5xl">
-            The couch is dead.
+            Kids grow. Couches die.
             <br />
-            The leaves won.
+            The leaves keep coming.
             <br />
-            <span className="text-gold">We&apos;ve got it.</span>
+            <span className="text-gold">That&apos;s what we&apos;re for.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-md text-base text-gray-400 sm:text-lg">
-            Book a pickup from your phone in about a minute — no phone calls,
-            no borrowing a truck. Family-owned in the south metro since{" "}
-            {COMPANY.founded}.
+            Life makes trash — that&apos;s normal. Book the pickup from your
+            phone in about a minute, whenever life gives you a minute.
+            Family-owned in the south metro since {COMPANY.founded}.
           </p>
         </div>
 
-        {/* Booking action cards */}
-        <div className="mx-auto mt-8 grid max-w-2xl gap-4 sm:grid-cols-2">
-          <Link
-            href="/book?service=yard"
-            className="group rounded-2xl border border-gray-700 bg-charcoal-light p-5 transition-colors hover:border-gold active:scale-[0.99]"
-          >
-            <span className="text-4xl">🍂</span>
-            <p className="mt-3 font-slab text-xl font-semibold text-white">
-              Yard waste pickup
-            </p>
-            <p className="mt-1 text-sm text-gray-400">
-              ${YARD_WASTE.onCallBagPrice}/bag, grabbed on your regular pickup
-              day. Book by the night before.
-            </p>
-            <p className="mt-3 text-sm font-semibold text-gold group-hover:underline">
-              Book bags →
-            </p>
-          </Link>
-          <Link
-            href="/book?service=bulk"
-            className="group rounded-2xl border border-gray-700 bg-charcoal-light p-5 transition-colors hover:border-gold active:scale-[0.99]"
-          >
-            <span className="text-4xl">🛋️</span>
-            <p className="mt-3 font-slab text-xl font-semibold text-white">
-              Big stuff pickup
-            </p>
-            <p className="mt-1 text-sm text-gray-400">
-              Couches, mattresses, appliances, the swing set the kids outgrew.
-              Gone on {BULK_PICKUP.pickupDay}.
-            </p>
-            <p className="mt-3 text-sm font-semibold text-gold group-hover:underline">
-              Book big stuff →
-            </p>
-          </Link>
+        {/* Life-moment entry points */}
+        <div className="mx-auto mt-8 max-w-2xl">
+          <p className="text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
+            Sound familiar?
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {LIFE_MOMENTS.map((m) => (
+              <Link
+                key={m.key}
+                href={`/book?moment=${m.key}`}
+                className="group flex items-center gap-3 rounded-xl border border-gray-700 bg-charcoal-light px-4 py-3.5 transition-colors hover:border-gold active:scale-[0.99]"
+              >
+                <span className="text-2xl">{m.emoji}</span>
+                <span>
+                  <span className="block text-sm font-semibold text-white group-hover:text-gold">
+                    {m.label}
+                  </span>
+                  <span className="block text-xs text-gray-500">
+                    {m.description}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-col items-center justify-center gap-2 text-sm sm:flex-row sm:gap-6">
+            <Link href="/book?service=yard" className="font-medium text-gold hover:underline">
+              Just need yard bags picked up →
+            </Link>
+            <Link href="/book?service=bulk" className="font-medium text-gold hover:underline">
+              Something else big →
+            </Link>
+          </div>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-500">
@@ -75,24 +73,28 @@ export default function Home() {
         </p>
       </section>
 
-      {/* How it works */}
+      {/* Built around her week, not our route map */}
       <section className="border-t border-gray-800 px-4 py-12">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-center font-slab text-2xl font-semibold text-white">
-            Three taps, then forget about it
+            Built for the mental load
           </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-gray-400">
+            You&apos;ve got 400 things in your head. This shouldn&apos;t be one
+            of them.
+          </p>
           <div className="mt-8 space-y-5 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0">
-            <HowStep number={1} title="Tell us what & where">
-              Yard bags or big items, plus your city. We already know your
-              pickup day.
+            <HowStep number={1} title="Book whenever">
+              9:47 PM after bedtime works. Tell us what happened and where you
+              live — we already know your pickup day.
             </HowStep>
-            <HowStep number={2} title="We confirm the day">
-              You see the exact pickup date before you book. Text reminder the
-              night before, if you want it.
+            <HowStep number={2} title="Then stop thinking about it">
+              Exact date and price before you tap “book.” Drop it on the family
+              calendar, get a text the night before.
             </HowStep>
             <HowStep number={3} title="Curb it & carry on">
-              Set it out by 6:30 AM (7:00 for big items). It disappears while
-              you do the school run.
+              Set it out by 6:30 AM ({BULK_PICKUP.itemsOutBy} for big items).
+              It disappears while you do the school run.
             </HowStep>
           </div>
         </div>
