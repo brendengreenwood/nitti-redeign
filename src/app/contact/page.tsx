@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { COMPANY, BULK_PICKUP, EVENT_BOXES, ROLLOFF_SIZES } from "@/lib/data";
 
 const TABS = [
@@ -12,18 +12,23 @@ const TABS = [
 
 type TabKey = (typeof TABS)[number]["key"];
 
-export default function ContactPage() {
-  const [activeTab, setActiveTab] = useState<TabKey>("general");
+// Hydration-safe URL-hash read for the initial tab (server renders no hash)
+const subscribeHash = (callback: () => void) => {
+  window.addEventListener("hashchange", callback);
+  return () => window.removeEventListener("hashchange", callback);
+};
+const getHash = () => window.location.hash.slice(1);
+const getServerHash = () => "";
 
-  useEffect(() => {
-    const hash = window.location.hash.slice(1) as TabKey;
-    if (TABS.some((t) => t.key === hash)) {
-      setActiveTab(hash);
-    }
-  }, []);
+export default function ContactPage() {
+  const [chosenTab, setChosenTab] = useState<TabKey | null>(null);
+
+  const hash = useSyncExternalStore(subscribeHash, getHash, getServerHash);
+  const hashTab = TABS.some((t) => t.key === hash) ? (hash as TabKey) : null;
+  const activeTab = chosenTab ?? hashTab ?? "general";
 
   function switchTab(key: TabKey) {
-    setActiveTab(key);
+    setChosenTab(key);
     window.history.replaceState(null, "", `#${key}`);
   }
 

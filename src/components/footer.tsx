@@ -74,6 +74,11 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/book" className="font-medium text-gold hover:text-gold-hover">
+                  Book a Pickup
+                </Link>
+              </li>
+              <li>
                 <Link href="/services" className="hover:text-white">
                   Services
                 </Link>

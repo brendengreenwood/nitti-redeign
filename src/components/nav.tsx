@@ -34,9 +34,15 @@ export default function Nav() {
           ))}
           <Link
             href="/sign-up"
-            className="rounded-lg bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="text-sm font-medium text-gray-400 transition-colors hover:text-white"
           >
             Sign Up
+          </Link>
+          <Link
+            href="/book"
+            className="rounded-lg bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+          >
+            Book a Pickup
           </Link>
           <a
             href={COMPANY.paymentPortalUrl}
@@ -62,19 +68,18 @@ export default function Nav() {
         </nav>
 
         <div className="flex items-center gap-3 md:hidden">
-          <a
-            href={`tel:${COMPANY.phone}`}
+          <Link
+            href="/book"
+            onClick={() => setOpen(false)}
             className="rounded-lg bg-gold px-3 py-1.5 text-xs font-semibold text-charcoal"
           >
-            Call
-          </a>
+            Book
+          </Link>
           <a
-            href={COMPANY.paymentPortalUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`tel:${COMPANY.phone}`}
             className="rounded-lg border border-gray-600 px-3 py-1.5 text-xs font-medium text-gray-300"
           >
-            Pay
+            Call
           </a>
           <button
             onClick={() => setOpen(!open)}
@@ -116,12 +121,27 @@ export default function Nav() {
               </Link>
             ))}
             <Link
-              href="/sign-up"
+              href="/book"
               onClick={() => setOpen(false)}
               className="rounded-lg bg-gold px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-charcoal"
             >
-              Sign Up for Service
+              Book a Pickup
             </Link>
+            <Link
+              href="/sign-up"
+              onClick={() => setOpen(false)}
+              className="rounded-lg border border-gray-600 px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-gray-300"
+            >
+              Sign Up for Weekly Service
+            </Link>
+            <a
+              href={COMPANY.paymentPortalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-gray-500"
+            >
+              Pay Online
+            </a>
             <Link
               href="/employment"
               onClick={() => setOpen(false)}

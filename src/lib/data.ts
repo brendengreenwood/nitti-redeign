@@ -203,6 +203,26 @@ export const TESTIMONIALS = [
   },
 ];
 
+export interface BulkItem {
+  key: string;
+  label: string;
+  emoji: string;
+  /** Typical per-item charge estimate; office confirms final price. */
+  typicalPrice: number;
+}
+
+export const BULK_ITEMS: BulkItem[] = [
+  { key: "couch", label: "Couch / sofa", emoji: "🛋️", typicalPrice: 30 },
+  { key: "mattress", label: "Mattress / box spring", emoji: "🛏️", typicalPrice: 25 },
+  { key: "chair", label: "Recliner / big chair", emoji: "🪑", typicalPrice: 20 },
+  { key: "appliance", label: "Appliance", emoji: "🧊", typicalPrice: 35 },
+  { key: "tv", label: "TV / electronics", emoji: "📺", typicalPrice: 30 },
+  { key: "grill", label: "Grill / patio stuff", emoji: "🔥", typicalPrice: 20 },
+  { key: "playset", label: "Swing set / kid gear", emoji: "🛝", typicalPrice: 25 },
+  { key: "carpet", label: "Rolled carpet / rug", emoji: "🧻", typicalPrice: 15 },
+  { key: "other", label: "Something else", emoji: "📦", typicalPrice: 25 },
+];
+
 export const NAV_LINKS = [
   { label: "Services", href: "/services" },
   { label: "Schedule", href: "/schedule" },
@@ -236,6 +256,43 @@ export function getNextPickupDate(
   const nextDate = new Date(fromDate);
   nextDate.setDate(nextDate.getDate() + minDaysUntil);
   return nextDate;
+}
+
+/**
+ * Bulk pickups run on Thursdays; requests must be in by Wednesday 11:00 AM.
+ * Returns the next bookable Thursday plus the request deadline it depends on.
+ */
+export function getNextBulkPickupDate(fromDate: Date = new Date()): {
+  pickupDate: Date;
+  requestDeadline: Date;
+} {
+  const deadline = new Date(fromDate);
+  const daysToWednesday = (3 - fromDate.getDay() + 7) % 7;
+  deadline.setDate(deadline.getDate() + daysToWednesday);
+  deadline.setHours(11, 0, 0, 0);
+  if (deadline.getTime() <= fromDate.getTime()) {
+    deadline.setDate(deadline.getDate() + 7);
+  }
+  const pickupDate = new Date(deadline);
+  pickupDate.setDate(pickupDate.getDate() + 1);
+  return { pickupDate, requestDeadline: deadline };
+}
+
+/** On-call yard waste bags need 24-hour notice before the regular pickup day. */
+export function getNextYardWastePickupDate(
+  pickupDays: string[],
+  fromDate: Date = new Date()
+): Date {
+  const earliest = new Date(fromDate.getTime() + 24 * 60 * 60 * 1000);
+  return getNextPickupDate(pickupDays, earliest);
+}
+
+/** Yard waste season runs April 14 – November 14. */
+export function isYardWasteSeason(date: Date = new Date()): boolean {
+  const year = date.getFullYear();
+  const start = new Date(year, 3, 14);
+  const end = new Date(year, 10, 14, 23, 59, 59);
+  return date >= start && date <= end;
 }
 
 export function getUpcomingHoliday(

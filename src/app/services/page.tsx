@@ -264,6 +264,15 @@ export default function ServicesPage() {
           <p className="mt-4 text-sm text-gray-500">
             Compostable paper bags required. Available at most hardware stores.
           </p>
+
+          <div className="mt-6">
+            <Link
+              href="/book?service=yard"
+              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+            >
+              Book Bag Pickup
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -324,7 +333,7 @@ export default function ServicesPage() {
 
           <div className="mt-6">
             <Link
-              href="/contact#bulk-pickup"
+              href="/book?service=bulk"
               className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Schedule a Bulk Pickup
