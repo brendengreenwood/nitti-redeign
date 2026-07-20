@@ -12,7 +12,7 @@ export default function EmploymentPage() {
     <>
       <section className="bg-charcoal px-4 py-14">
         <div className="mx-auto max-w-3xl text-center xl:max-w-4xl">
-          <h1 className="font-slab text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl">
             Join Our Team
           </h1>
           <p className="mt-3 text-gray-400">
@@ -24,8 +24,8 @@ export default function EmploymentPage() {
 
       <section className="px-4 py-12">
         <div className="mx-auto max-w-2xl xl:max-w-3xl">
-          <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
-            <h2 className="font-slab text-lg font-semibold text-white">
+          <div className="rounded border border-gray-700 bg-charcoal-light p-6">
+            <h2 className="font-display text-lg font-semibold text-white">
               Driver Application
             </h2>
             <p className="mt-1 text-sm text-gray-500">
@@ -98,7 +98,7 @@ export default function EmploymentPage() {
 
               <button
                 type="button"
-                className="w-full rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover sm:w-auto"
+                className="w-full rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover sm:w-auto"
               >
                 Submit Application
               </button>

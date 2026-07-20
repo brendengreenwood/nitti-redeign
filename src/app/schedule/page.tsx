@@ -13,7 +13,7 @@ export default function SchedulePage() {
     <>
       <section className="bg-charcoal px-4 py-14">
         <div className="mx-auto max-w-4xl text-center xl:max-w-5xl">
-          <h1 className="font-slab text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl">
             Pickup Schedule
           </h1>
           <p className="mt-3 text-gray-400">
@@ -31,10 +31,10 @@ export default function SchedulePage() {
 
       <section className="border-t border-gray-800 bg-charcoal-light px-4 py-12">
         <div className="mx-auto max-w-3xl xl:max-w-4xl">
-          <h2 className="mb-6 font-slab text-xl font-semibold text-white">
+          <h2 className="mb-6 font-display text-xl font-semibold text-white">
             Weekly Schedule by City
           </h2>
-          <div className="overflow-hidden rounded-xl border border-gray-700">
+          <div className="overflow-hidden rounded border border-gray-700">
             <table className="w-full text-sm">
               <thead className="bg-charcoal-light">
                 <tr>
@@ -78,7 +78,7 @@ export default function SchedulePage() {
 
       <section className="border-t border-gray-800 px-4 py-12">
         <div className="mx-auto max-w-3xl xl:max-w-4xl">
-          <h2 className="mb-2 font-slab text-xl font-semibold text-white">
+          <h2 className="mb-2 font-display text-xl font-semibold text-white">
             2026 Holiday Schedule
           </h2>
           <p className="mb-6 text-sm text-gray-500">
@@ -91,7 +91,7 @@ export default function SchedulePage() {
               return (
                 <div
                   key={h.date}
-                  className="flex items-center justify-between rounded-lg border border-gray-700 bg-charcoal-light px-4 py-3"
+                  className="flex items-center justify-between rounded border border-gray-700 bg-charcoal-light px-4 py-3"
                 >
                   <span className="font-medium text-white">{h.name}</span>
                   <span className="text-sm text-gray-500">
@@ -110,7 +110,7 @@ export default function SchedulePage() {
 
       <section className="border-t border-gray-800 bg-charcoal-light px-4 py-12">
         <div className="mx-auto max-w-3xl xl:max-w-4xl">
-          <h2 className="mb-6 font-slab text-xl font-semibold text-white">
+          <h2 className="mb-6 font-display text-xl font-semibold text-white">
             Cart Placement Reminders
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -119,7 +119,7 @@ export default function SchedulePage() {
             <ReminderCard title="Spacing" detail="3 feet apart from other carts or obstacles" />
             <ReminderCard title="Lids" detail="Keep lids closed for pickup" />
           </div>
-          <div className="mt-6 rounded-lg border border-gold/30 bg-gold/10 p-4">
+          <div className="mt-6 rounded border border-gold/30 bg-gold/10 p-4">
             <p className="text-sm text-gray-300">
               <span className="font-semibold">Missed pickup?</span> Call{" "}
               <a
@@ -140,7 +140,7 @@ export default function SchedulePage() {
 
 function ReminderCard({ title, detail }: { title: string; detail: string }) {
   return (
-    <div className="rounded-lg border border-gray-700 bg-charcoal-light p-4">
+    <div className="rounded border border-gray-700 bg-charcoal-light p-4">
       <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
         {title}
       </p>

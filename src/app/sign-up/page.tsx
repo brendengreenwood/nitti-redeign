@@ -85,7 +85,7 @@ export default function SignUpPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-2xl font-bold text-white">
             You&apos;re all set!
           </h1>
           <p className="mt-3 text-gray-400">
@@ -107,7 +107,7 @@ export default function SignUpPage() {
     <>
       <section className="bg-charcoal px-4 py-10">
         <div className="mx-auto max-w-2xl text-center xl:max-w-3xl">
-          <h1 className="font-slab text-3xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold text-white">
             Sign Up for Service
           </h1>
           <p className="mt-2 text-gray-400">
@@ -144,7 +144,7 @@ export default function SignUpPage() {
             ))}
           </div>
 
-          <div className="mb-6 rounded-lg border border-gold/20 bg-gold/10 p-4">
+          <div className="mb-6 rounded border border-gold/20 bg-gold/10 p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-300">Estimated monthly cost</span>
               <span className="text-xl font-bold text-white">
@@ -220,7 +220,7 @@ export default function SignUpPage() {
                 </Field>
               </div>
               {selectedCity && (
-                <div className="rounded-lg border border-gold/20 bg-gold/10 p-3">
+                <div className="rounded border border-gold/20 bg-gold/10 p-3">
                   <p className="text-sm text-gray-300">
                     Your pickup day{selectedCity.pickupDays.length > 1 ? "s" : ""} in {selectedCity.name}:{" "}
                     <strong>{selectedCity.pickupDays.join(" & ")}</strong>
@@ -237,7 +237,7 @@ export default function SignUpPage() {
                   {TRASH_PLANS.map((plan) => (
                     <label
                       key={plan.label}
-                      className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors ${
+                      className={`flex cursor-pointer items-center gap-3 rounded border p-4 transition-colors ${
                         form.trashSize === String(plan.gallons) &&
                         (plan.count === 1 || form.trashSize === "95x2")
                           ? "border-gold bg-gold/10"
@@ -275,7 +275,7 @@ export default function SignUpPage() {
               <Field label="Yard waste (seasonal, Apr–Nov)">
                 <div className="grid gap-3 sm:grid-cols-2">
                   <label
-                    className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 ${
+                    className={`flex cursor-pointer items-center gap-3 rounded border p-4 ${
                       form.yardWaste === "none"
                         ? "border-gold bg-gold/10"
                         : "border-gray-700"
@@ -297,7 +297,7 @@ export default function SignUpPage() {
                     </div>
                   </label>
                   <label
-                    className={`flex cursor-pointer items-center gap-3 rounded-lg border p-4 ${
+                    className={`flex cursor-pointer items-center gap-3 rounded border p-4 ${
                       form.yardWaste === "seasonal"
                         ? "border-gold bg-gold/10"
                         : "border-gray-700"
@@ -423,8 +423,8 @@ export default function SignUpPage() {
 
           {step === 3 && (
             <div className="space-y-4">
-              <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
-                <h3 className="mb-4 font-slab font-semibold text-white">
+              <div className="rounded border border-gray-700 bg-charcoal-light p-6">
+                <h3 className="mb-4 font-display font-semibold text-white">
                   Review your information
                 </h3>
                 <dl className="space-y-2 text-sm">
@@ -448,7 +448,7 @@ export default function SignUpPage() {
                 </dl>
               </div>
 
-              <div className="rounded-lg border border-gold/20 bg-gold/10 p-4">
+              <div className="rounded border border-gold/20 bg-gold/10 p-4">
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-white">
                     Estimated monthly cost
@@ -471,7 +471,7 @@ export default function SignUpPage() {
             {step > 0 ? (
               <button
                 onClick={() => setStep(step - 1)}
-                className="rounded-lg border border-gray-600 px-5 py-2.5 text-sm font-medium text-gray-300 hover:bg-charcoal-light"
+                className="rounded border border-gray-600 px-5 py-2.5 text-sm font-medium text-gray-300 hover:bg-charcoal-light"
               >
                 Back
               </button>
@@ -481,14 +481,14 @@ export default function SignUpPage() {
             {step < STEPS.length - 1 ? (
               <button
                 onClick={() => setStep(step + 1)}
-                className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+                className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
               >
                 Continue
               </button>
             ) : (
               <button
                 onClick={() => setSubmitted(true)}
-                className="rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+                className="rounded bg-gold px-6 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
               >
                 Start Service
               </button>

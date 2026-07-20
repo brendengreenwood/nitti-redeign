@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Zilla_Slab } from "next/font/google";
+import { Inter, Barlow_Condensed } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import TabBar from "@/components/tab-bar";
@@ -10,10 +10,10 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const zillaSlab = Zilla_Slab({
+const barlowCondensed = Barlow_Condensed({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
-  variable: "--font-slab",
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${zillaSlab.variable}`}>
+    <html lang="en" className={`${inter.variable} ${barlowCondensed.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <Nav />
         <main className="flex-1">{children}</main>

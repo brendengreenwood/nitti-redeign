@@ -10,6 +10,7 @@ import {
   getUpcomingHoliday,
   type CityKey,
 } from "@/lib/data";
+import Icon from "@/components/icons";
 import {
   BOOKINGS_KEY,
   HOUSE_NAME_KEY,
@@ -132,8 +133,8 @@ export default function AccountDashboard() {
   if (!session) {
     return (
       <div className="mx-auto max-w-sm px-4 py-16 text-center">
-        <p className="text-4xl">🏡</p>
-        <h1 className="mt-4 font-slab text-2xl font-bold text-white">
+        <Icon name="truck" className="mx-auto h-10 w-10 text-gold" />
+        <h1 className="mt-4 font-display text-3xl font-bold uppercase text-white">
           My Nitti
         </h1>
         <p className="mt-2 text-sm text-gray-400">
@@ -142,13 +143,13 @@ export default function AccountDashboard() {
         <div className="mt-8 flex flex-col gap-3">
           <Link
             href="/login"
-            className="rounded-xl bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="rounded bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
           >
             Log In
           </Link>
           <Link
             href="/welcome"
-            className="rounded-xl border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
+            className="rounded border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
           >
             New house? Set up service →
           </Link>
@@ -180,7 +181,7 @@ export default function AccountDashboard() {
               />
               <button
                 onClick={commitHouseName}
-                className="rounded-lg bg-gold px-3 py-2 text-xs font-semibold text-charcoal"
+                className="rounded bg-gold px-3 py-2 text-xs font-semibold text-charcoal"
               >
                 Save
               </button>
@@ -193,8 +194,8 @@ export default function AccountDashboard() {
               }}
               className="mt-0.5 text-left"
             >
-              <h1 className="font-slab text-2xl font-bold text-white">
-                {houseName ?? "Welcome home"} <span className="text-base">🏡</span>
+              <h1 className="font-display text-3xl font-bold uppercase text-white">
+                {houseName ?? "Welcome home"}
               </h1>
               <span className="text-xs text-gray-500 underline decoration-dotted">
                 {houseName ? "rename your house" : "first house? name it — it's a big deal"}
@@ -205,21 +206,21 @@ export default function AccountDashboard() {
       </div>
 
       {/* Next pickup */}
-      <div className="mt-6 rounded-2xl bg-charcoal-light p-5">
+      <div className="mt-6 rounded bg-charcoal-light p-5">
         <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
           Next trash day
         </p>
         {cityInfo && nextPickup ? (
           <>
-            <p className="mt-1 font-slab text-xl font-semibold text-white">
+            <p className="mt-1 font-display text-xl font-semibold text-white">
               {formatDate(nextPickup)}
             </p>
             <p className="mt-1 text-sm text-gray-400">
               {cityInfo.name} · carts out by 6:30 AM
             </p>
             {holiday && (
-              <p className="mt-2 rounded-lg border border-gold/40 bg-gold-light p-2 text-xs font-medium text-gray-800">
-                ⚠️ {holiday.name} may delay pickups by one day.
+              <p className="mt-2 rounded border border-gold/40 bg-gold-light p-2 text-xs font-medium text-gray-800">
+                Note: {holiday.name} may delay pickups by one day.
               </p>
             )}
           </>
@@ -234,7 +235,7 @@ export default function AccountDashboard() {
                 <button
                   key={c.key}
                   onClick={() => selectCity(c.key)}
-                  className="rounded-lg border border-gray-700 bg-charcoal px-3 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:border-gold hover:text-gold"
+                  className="rounded border border-gray-700 bg-charcoal px-3 py-2.5 text-sm font-medium text-gray-300 transition-colors hover:border-gold hover:text-gold"
                 >
                   {c.name}
                 </button>
@@ -246,17 +247,17 @@ export default function AccountDashboard() {
 
       {/* Current plan */}
       {plan && (
-        <div className="mt-3 flex items-center justify-between rounded-2xl bg-charcoal-light p-5">
+        <div className="mt-3 flex items-center justify-between rounded bg-charcoal-light p-5">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
               Your service
             </p>
             <p className="mt-1 text-sm font-semibold text-white">
               {plan.label} cart · weekly
-              {plan.yardWaste && " · 🍂 yard waste pass"}
+              {plan.yardWaste && " · yard waste pass"}
             </p>
           </div>
-          <p className="font-slab text-xl font-bold text-white">
+          <p className="font-display text-xl font-bold text-white">
             ${plan.pricePerMonth}
             <span className="text-xs font-normal text-gray-500">/mo</span>
           </p>
@@ -264,24 +265,24 @@ export default function AccountDashboard() {
       )}
 
       {/* Quick order — the "honey, can you add a pickup?" row */}
-      <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-gray-500">
+      <p className="overline-label mt-6">
         Add to a pickup
       </p>
       <div className="mt-2 grid grid-cols-2 gap-3">
         <Link
           href="/book?service=bulk"
-          className="rounded-xl border border-gray-700 bg-charcoal-light p-4 transition-colors hover:border-gold active:scale-[0.99]"
+          className="rounded border border-gray-700 bg-charcoal-light p-4 transition-colors hover:border-gold active:scale-[0.99]"
         >
-          <span className="text-2xl">🛋️</span>
-          <p className="mt-1 text-sm font-semibold text-white">Big item</p>
+          <Icon name="couch" className="h-6 w-6 text-gold" />
+          <p className="mt-1 font-display text-base font-semibold uppercase tracking-wide text-white">Big item</p>
           <p className="text-xs text-gray-500">Gone Thursday</p>
         </Link>
         <Link
           href="/book?service=yard"
-          className="rounded-xl border border-gray-700 bg-charcoal-light p-4 transition-colors hover:border-gold active:scale-[0.99]"
+          className="rounded border border-gray-700 bg-charcoal-light p-4 transition-colors hover:border-gold active:scale-[0.99]"
         >
-          <span className="text-2xl">🍂</span>
-          <p className="mt-1 text-sm font-semibold text-white">Yard bags</p>
+          <Icon name="leaf" className="h-6 w-6 text-gold" />
+          <p className="mt-1 font-display text-base font-semibold uppercase tracking-wide text-white">Yard bags</p>
           <p className="text-xs text-gray-500">On your trash day</p>
         </Link>
       </div>
@@ -289,18 +290,18 @@ export default function AccountDashboard() {
       {/* Upcoming ordered pickups */}
       {bookings.length > 0 && (
         <>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <p className="overline-label mt-6">
             Ordered pickups
           </p>
           <div className="mt-2 space-y-2">
             {bookings.map((b) => (
               <div
                 key={b.id}
-                className="flex items-center justify-between rounded-xl border border-green-trust bg-green-trust/15 p-4"
+                className="flex items-center justify-between rounded border border-green-trust bg-green-trust/15 p-4"
               >
                 <div>
                   <p className="text-sm font-semibold text-white">
-                    {b.service === "yard" ? "🍂" : "🛋️"} {b.summary}
+                    {b.summary}
                   </p>
                   <p className="text-xs text-gray-400">
                     {formatDate(b.dateISO)} · {b.cityName} · est. ${b.estimate}
@@ -319,18 +320,18 @@ export default function AccountDashboard() {
       )}
 
       {/* Billing */}
-      <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-gray-500">
+      <p className="overline-label mt-6">
         Billing
       </p>
-      <div className="mt-2 rounded-2xl bg-charcoal-light p-5">
+      <div className="mt-2 rounded bg-charcoal-light p-5">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-gray-400">Current balance</p>
-            <p className="font-slab text-2xl font-bold text-white">$0.00</p>
+            <p className="font-display text-2xl font-bold text-white">$0.00</p>
           </div>
           {autopay?.enabled ? (
             <span className="rounded-full bg-green-trust px-3 py-1 text-xs font-semibold text-white">
-              Autopay on{autopay.last4 ? ` · •••${autopay.last4}` : ""} ✓
+              Autopay on{autopay.last4 ? ` · •••${autopay.last4}` : ""}
             </span>
           ) : (
             <span className="rounded-full border border-gray-600 px-3 py-1 text-xs font-semibold text-gray-400">
@@ -354,7 +355,7 @@ export default function AccountDashboard() {
               />
               <button
                 onClick={enableAutopay}
-                className="shrink-0 rounded-lg bg-gold px-4 py-2 text-xs font-semibold text-charcoal"
+                className="shrink-0 rounded bg-gold px-4 py-2 text-xs font-semibold text-charcoal"
               >
                 Save
               </button>
@@ -362,7 +363,7 @@ export default function AccountDashboard() {
           ) : (
             <button
               onClick={() => setEnablingAutopay(true)}
-              className="mt-3 w-full rounded-xl border border-gold/50 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
+              className="mt-3 w-full rounded border border-gold/50 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
             >
               Turn on autopay — stop tracking due dates
             </button>
@@ -372,7 +373,7 @@ export default function AccountDashboard() {
           href={COMPANY.paymentPortalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 block rounded-xl bg-gold px-4 py-3 text-center text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+          className="mt-4 block rounded bg-gold px-4 py-3 text-center text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
         >
           Pay / Manage Billing
         </a>
@@ -402,15 +403,15 @@ export default function AccountDashboard() {
 
       {/* Household */}
       {session.partnerPhone && (
-        <p className="mt-4 rounded-xl bg-charcoal-light p-3 text-center text-xs text-gray-500">
-          👫 Two adults on this account — either number logs in and can order
+        <p className="mt-4 rounded bg-charcoal-light p-3 text-center text-xs text-gray-500">
+          Two adults on this account — either number logs in and can order
           pickups.
         </p>
       )}
 
       {/* Reliability note */}
-      <div className="mt-6 rounded-2xl border border-gray-700 p-5 text-center">
-        <p className="font-slab text-lg font-semibold text-white">
+      <div className="mt-6 rounded border border-gray-700 p-5 text-center">
+        <p className="font-display text-lg font-semibold text-white">
           Same trucks. Same phone number. Since {COMPANY.founded}.
         </p>
         <p className="mt-1 text-sm text-gray-400">

@@ -40,7 +40,7 @@ export default function Nav() {
           </Link>
           <Link
             href="/book"
-            className="rounded-lg bg-gold px-4 py-2 text-xs font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="bg-gold px-4 py-2 font-display text-sm font-semibold uppercase tracking-widest text-charcoal transition-colors hover:bg-gold-hover"
           >
             Book a Pickup
           </Link>
@@ -71,13 +71,13 @@ export default function Nav() {
           <Link
             href="/book"
             onClick={() => setOpen(false)}
-            className="rounded-lg bg-gold px-3 py-1.5 text-xs font-semibold text-charcoal"
+            className="bg-gold px-3 py-1.5 font-display text-sm font-semibold uppercase tracking-widest text-charcoal"
           >
             Book
           </Link>
           <a
             href={`tel:${COMPANY.phone}`}
-            className="rounded-lg border border-gray-600 px-3 py-1.5 text-xs font-medium text-gray-300"
+            className="border border-gray-600 px-3 py-1.5 font-display text-sm font-medium uppercase tracking-widest text-gray-300"
           >
             Call
           </a>
@@ -123,14 +123,14 @@ export default function Nav() {
             <Link
               href="/book"
               onClick={() => setOpen(false)}
-              className="rounded-lg bg-gold px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-charcoal"
+              className="bg-gold px-4 py-2 text-center font-display text-sm font-semibold uppercase tracking-widest text-charcoal"
             >
               Book a Pickup
             </Link>
             <Link
               href="/welcome"
               onClick={() => setOpen(false)}
-              className="rounded-lg border border-gray-600 px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-gray-300"
+              className="border border-gray-600 px-4 py-2 text-center font-display text-sm font-semibold uppercase tracking-widest text-gray-300"
             >
               New House? Get Started
             </Link>

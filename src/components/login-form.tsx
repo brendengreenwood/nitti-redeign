@@ -50,7 +50,7 @@ export default function LoginForm() {
 
   return (
     <div className="mx-auto max-w-sm px-4 py-12">
-      <h1 className="text-center font-slab text-3xl font-bold text-white">
+      <h1 className="text-center font-display text-3xl font-bold text-white">
         Welcome back 👋
       </h1>
       <p className="mt-2 text-center text-sm text-gray-400">
@@ -72,7 +72,7 @@ export default function LoginForm() {
           />
           <button
             onClick={sendCode}
-            className="w-full rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="w-full rounded bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
           >
             Text Me a Code
           </button>
@@ -96,7 +96,7 @@ export default function LoginForm() {
           />
           <button
             onClick={verify}
-            className="w-full rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="w-full rounded bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
           >
             Log In
           </button>

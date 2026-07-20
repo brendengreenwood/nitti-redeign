@@ -12,6 +12,7 @@ import {
   type CityKey,
 } from "@/lib/data";
 import { HOUSE_NAME_KEY } from "@/lib/bookings";
+import Icon from "@/components/icons";
 import {
   AUTOPAY_KEY,
   LOGIN_FLAG_KEY,
@@ -96,8 +97,10 @@ export default function OnboardingWizard() {
     const firstPickup = cityInfo ? getNextPickupDate(cityInfo.pickupDays) : null;
     return (
       <div className="mx-auto max-w-lg px-4 py-12 text-center">
-        <p className="text-5xl">🎉</p>
-        <h1 className="mt-4 font-slab text-3xl font-bold text-white">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-trust">
+          <Icon name="check" className="h-8 w-8 text-white" />
+        </div>
+        <h1 className="mt-4 font-display text-3xl font-bold uppercase text-white">
           Welcome home{houseName.trim() ? `, ${houseName.trim()}` : ""}.
         </h1>
         <p className="mx-auto mt-3 max-w-sm text-gray-400">
@@ -121,28 +124,28 @@ export default function OnboardingWizard() {
           )}
           .
         </p>
-        <div className="mt-4 rounded-xl bg-charcoal-light p-4 text-sm text-gray-400">
+        <div className="mt-4 rounded bg-charcoal-light p-4 text-sm text-gray-400">
           {autopayOn ? (
-            <>💳 Autopay is on — you&apos;ll never think about a due date.</>
+            <>Autopay is on — you&apos;ll never think about a due date.</>
           ) : (
-            <>💳 Autopay is off — you can flip it on anytime in My Nitti.</>
+            <>Autopay is off — you can flip it on anytime in My Nitti.</>
           )}
           {partnerPhone.trim() && (
             <p className="mt-1">
-              👫 Both of your numbers work — either of you can order pickups.
+              Both of your numbers work — either of you can order pickups.
             </p>
           )}
         </div>
         <div className="mt-8 flex flex-col gap-3">
           <button
             onClick={() => router.push("/account")}
-            className="rounded-xl bg-gold px-6 py-4 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            className="bg-gold px-6 py-4 font-display text-base font-semibold uppercase tracking-widest text-charcoal transition-colors hover:bg-gold-hover"
           >
             Open My Nitti
           </button>
           <Link
             href="/book"
-            className="rounded-xl border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
+            className="rounded border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
           >
             Actually — there&apos;s already a couch to get rid of
           </Link>
@@ -180,8 +183,8 @@ export default function OnboardingWizard() {
       {/* Step 0: the problem pitch */}
       {step === 0 && (
         <div>
-          <h1 className="font-slab text-3xl font-bold leading-tight text-white">
-            You bought a house. 🥂
+          <h1 className="font-display text-4xl font-bold uppercase leading-none text-white">
+            You bought a house.
           </h1>
           <p className="mt-2 text-gray-400">
             Congrats — seriously, that&apos;s huge. Somewhere between the
@@ -189,20 +192,20 @@ export default function OnboardingWizard() {
           </p>
           <div className="mt-5 space-y-3">
             {[
-              ["📄", "The big guys want a 1–2 year contract before the boxes are even unpacked."],
-              ["🕳️", "Then the “fuel & environmental fees” show up on invoice two."],
-              ["☎️", "And when a pickup gets missed, you're arguing with a call tree."],
-            ].map(([emoji, text]) => (
+              ["doc", "The big guys want a 1–2 year contract before the boxes are even unpacked."],
+              ["card", "Then the “fuel & environmental fees” show up on invoice two."],
+              ["phone", "And when a pickup gets missed, you're arguing with a call tree."],
+            ].map(([icon, text]) => (
               <div
                 key={text}
-                className="flex items-start gap-3 rounded-xl bg-charcoal-light p-4"
+                className="flex items-start gap-3 rounded bg-charcoal-light p-4"
               >
-                <span className="text-xl">{emoji}</span>
+                <Icon name={icon} className="h-6 w-6 shrink-0 text-gold" />
                 <p className="text-sm text-gray-300">{text}</p>
               </div>
             ))}
           </div>
-          <div className="mt-5 rounded-xl border border-gold/40 bg-gold/10 p-4">
+          <div className="mt-5 rounded border border-gold/40 bg-gold/10 p-4">
             <p className="text-sm text-gray-300">
               <span className="font-semibold text-white">
                 We&apos;re the local one.
@@ -224,7 +227,7 @@ export default function OnboardingWizard() {
       {/* Step 1: the place */}
       {step === 1 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Where&apos;s the new place?
           </h1>
           <div className="mt-5 grid grid-cols-2 gap-2">
@@ -232,7 +235,7 @@ export default function OnboardingWizard() {
               <button
                 key={c.key}
                 onClick={() => setCity(c.key)}
-                className={`rounded-xl border px-3 py-3 text-sm font-medium transition-colors ${
+                className={`rounded border px-3 py-3 text-sm font-medium transition-colors ${
                   city === c.key
                     ? "border-gold bg-gold/10 text-gold"
                     : "border-gray-700 bg-charcoal-light text-gray-300 hover:border-gold"
@@ -254,7 +257,7 @@ export default function OnboardingWizard() {
             type="text"
             value={houseName}
             onChange={(e) => setHouseName(e.target.value)}
-            placeholder="Name your house — optional, but it's a big deal 🏡"
+            placeholder="Name your house — optional, but it's a big deal"
             maxLength={32}
             className="form-input mt-3 py-3"
           />
@@ -269,7 +272,7 @@ export default function OnboardingWizard() {
       {/* Step 2: pick the cart */}
       {step === 2 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Pick your cart
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -280,7 +283,7 @@ export default function OnboardingWizard() {
               <button
                 key={p.label}
                 onClick={() => setPlanLabel(p.label)}
-                className={`flex w-full items-center justify-between rounded-xl border p-4 text-left transition-colors ${
+                className={`flex w-full items-center justify-between rounded border p-4 text-left transition-colors ${
                   planLabel === p.label
                     ? "border-gold bg-gold/10"
                     : "border-gray-700 bg-charcoal-light hover:border-gray-500"
@@ -290,7 +293,7 @@ export default function OnboardingWizard() {
                   <span className="block text-sm font-semibold text-white">
                     {p.label}
                     {p.popular && (
-                      <span className="ml-2 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold text-charcoal">
+                      <span className="ml-2 bg-gold px-2 py-0.5 font-display text-[10px] font-bold tracking-widest text-charcoal">
                         MOST HOUSES
                       </span>
                     )}
@@ -305,17 +308,17 @@ export default function OnboardingWizard() {
                       : "Diapers-and-everything stage"}
                   </span>
                 </span>
-                <span className="font-slab text-lg font-bold text-white">
+                <span className="font-display text-lg font-bold text-white">
                   ${p.pricePerMonth}
                   <span className="text-xs font-normal text-gray-500">/mo</span>
                 </span>
               </button>
             ))}
           </div>
-          <label className="mt-4 flex items-center justify-between rounded-xl border border-gray-700 bg-charcoal-light p-4">
+          <label className="mt-4 flex items-center justify-between rounded border border-gray-700 bg-charcoal-light p-4">
             <span>
               <span className="block text-sm font-semibold text-white">
-                🍂 Yard waste season pass
+                Yard waste season pass
               </span>
               <span className="text-xs text-gray-500">
                 {YARD_WASTE.seasonalPlanDescription} · ~$
@@ -335,7 +338,7 @@ export default function OnboardingWizard() {
       {/* Step 3: the household */}
       {step === 3 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Who&apos;s on the account?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -367,8 +370,8 @@ export default function OnboardingWizard() {
               inputMode="tel"
               className="form-input py-3"
             />
-            <p className="rounded-lg bg-charcoal-light p-3 text-xs text-gray-500">
-              👫 Add your partner and either of you can log in, order pickups,
+            <p className="rounded bg-charcoal-light p-3 text-xs text-gray-500">
+              Add your partner and either of you can log in, order pickups,
               and see the bill. “Honey, handled” becomes a one-tap thing.
             </p>
           </div>
@@ -383,16 +386,16 @@ export default function OnboardingWizard() {
       {/* Step 4: autopay */}
       {step === 4 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Never think about a due date
           </h1>
           <p className="mt-1 text-sm text-gray-400">
             Bills land every two months. Autopay means they also leave on their
             own.
           </p>
-          <label className="mt-5 flex items-center justify-between rounded-xl border border-gray-700 bg-charcoal-light p-4">
+          <label className="mt-5 flex items-center justify-between rounded border border-gray-700 bg-charcoal-light p-4">
             <span className="text-sm font-semibold text-white">
-              💳 Autopay {autopayOn ? "on" : "off"}
+              Autopay {autopayOn ? "on" : "off"}
             </span>
             <input
               type="checkbox"
@@ -423,7 +426,7 @@ export default function OnboardingWizard() {
               )}
             </>
           ) : (
-            <p className="mt-3 rounded-lg bg-charcoal-light p-3 text-xs text-gray-500">
+            <p className="mt-3 rounded bg-charcoal-light p-3 text-xs text-gray-500">
               No pressure — paper statements and the online portal still work.
               You can flip this on later in My Nitti.
             </p>
@@ -446,7 +449,7 @@ export default function OnboardingWizard() {
           )}
           <button
             onClick={goNext}
-            className="flex-1 rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover active:scale-[0.98]"
+            className="flex-1 bg-gold px-6 py-3.5 font-display text-base font-semibold uppercase tracking-widest text-charcoal transition-colors hover:bg-gold-hover active:scale-[0.98]"
           >
             {step === 0
               ? "Set Up My House"

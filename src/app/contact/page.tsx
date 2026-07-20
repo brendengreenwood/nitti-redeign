@@ -36,7 +36,7 @@ export default function ContactPage() {
     <>
       <section className="bg-charcoal px-4 py-14">
         <div className="mx-auto max-w-4xl text-center xl:max-w-5xl">
-          <h1 className="font-slab text-3xl font-bold text-white sm:text-4xl">
+          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl">
             Contact Us
           </h1>
           <p className="mt-3 text-gray-400">
@@ -49,8 +49,8 @@ export default function ContactPage() {
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-1">
-              <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
-                <h2 className="mb-4 font-slab font-semibold text-white">
+              <div className="rounded border border-gray-700 bg-charcoal-light p-6">
+                <h2 className="mb-4 font-display font-semibold text-white">
                   Get in Touch
                 </h2>
                 <div className="space-y-4 text-sm">
@@ -215,7 +215,7 @@ function BulkPickupForm() {
           placeholder="List items and their location (e.g., 'Couch on front porch, mattress in driveway')"
         />
       </Field>
-      <div className="rounded-lg border border-gold/30 bg-gold/10 p-3">
+      <div className="rounded border border-gold/30 bg-gold/10 p-3">
         <p className="text-xs text-gray-300">
           Items must be outside your building by {BULK_PICKUP.itemsOutBy} on{" "}
           {BULK_PICKUP.pickupDay}. Drivers cannot enter buildings. Appliances
@@ -255,7 +255,7 @@ function EventBoxForm() {
           <input type="date" className="form-input" />
         </Field>
       </div>
-      <div className="rounded-lg border border-gray-700 bg-charcoal-light p-3">
+      <div className="rounded border border-gray-700 bg-charcoal-light p-3">
         <p className="text-xs font-medium text-gray-300">How many do I need?</p>
         <ul className="mt-1 space-y-0.5 text-xs text-gray-500">
           {EVENT_BOXES.estimates.map((e) => (
@@ -303,9 +303,9 @@ function FormCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-4 rounded-xl border border-gray-700 bg-charcoal-light p-6">
+    <div className="space-y-4 rounded border border-gray-700 bg-charcoal-light p-6">
       <div>
-        <h2 className="font-slab text-lg font-semibold text-white">{title}</h2>
+        <h2 className="font-display text-lg font-semibold text-white">{title}</h2>
         <p className="mt-1 text-sm text-gray-500">{description}</p>
       </div>
       {children}
@@ -337,7 +337,7 @@ function SubmitButton({ children }: { children: React.ReactNode }) {
   return (
     <button
       type="button"
-      className="w-full rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover sm:w-auto"
+      className="w-full rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover sm:w-auto"
     >
       {children}
     </button>

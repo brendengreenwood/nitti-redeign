@@ -4,7 +4,8 @@ import { COMPANY, SERVICE_CITIES } from "@/lib/data";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-800 bg-charcoal text-gray-300">
+    <footer className="bg-charcoal text-gray-300">
+      <div className="stripe-rule" />
       <div className="mx-auto max-w-7xl px-4 py-12 2xl:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -33,7 +34,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+            <h4 className="overline-label mb-3">
               Contact
             </h4>
             <ul className="space-y-2 text-sm">
@@ -69,7 +70,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+            <h4 className="overline-label mb-3">
               Quick Links
             </h4>
             <ul className="space-y-2 text-sm">
@@ -107,7 +108,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
+            <h4 className="overline-label mb-3">
               Service Area
             </h4>
             <ul className="space-y-1 text-sm">

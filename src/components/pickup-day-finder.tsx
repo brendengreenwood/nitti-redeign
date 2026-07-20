@@ -46,9 +46,9 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
   const holiday = getUpcomingHoliday(7);
 
   return (
-    <div className={compact ? "rounded-xl bg-charcoal p-6" : "rounded-xl bg-charcoal p-8"}>
+    <div className={compact ? "rounded bg-charcoal p-6" : "rounded bg-charcoal p-8"}>
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="font-slab text-lg font-semibold text-white">
+        <h3 className="font-display text-xl font-semibold uppercase tracking-wide text-white">
           Find Your Pickup Day
         </h3>
         {selectedCity && (
@@ -67,7 +67,7 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
             <button
               key={c.key}
               onClick={() => selectCity(c.key)}
-              className="rounded-lg border border-gray-700 bg-charcoal-light px-3 py-2 text-sm font-medium text-gray-300 transition-colors hover:border-gold hover:text-gold"
+              className="rounded border border-gray-700 bg-charcoal-light px-3 py-2 text-sm font-medium text-gray-300 transition-colors hover:border-gold hover:text-gold"
             >
               {c.name}
             </button>
@@ -75,7 +75,7 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
         </div>
       ) : (
         <div className="space-y-3">
-          <div className="rounded-lg bg-charcoal-light p-4">
+          <div className="rounded bg-charcoal-light p-4">
             <p className="text-sm text-gray-400">
               Your pickup days in{" "}
               <span className="font-semibold text-white">{city.name}</span>
@@ -84,7 +84,7 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
               {city.pickupDays.map((day) => (
                 <span
                   key={day}
-                  className="rounded-full bg-gold px-3 py-1 text-sm font-semibold text-charcoal"
+                  className="bg-gold px-3 py-1 font-display text-sm font-semibold uppercase tracking-widest text-charcoal"
                 >
                   {day}
                 </span>
@@ -106,9 +106,9 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
           </div>
 
           {holiday && (
-            <div className="rounded-lg border border-gold/40 bg-gold-light p-3">
+            <div className="rounded border border-gold/40 bg-gold-light p-3">
               <p className="text-sm font-medium text-gray-800">
-                <span className="mr-1.5 inline-block">&#9888;&#65039;</span>
+                <span className="font-semibold">Holiday note:</span>{" "}
                 {holiday.name} may affect your pickup. All pickups on or after
                 the holiday are delayed one day.
               </p>
@@ -116,8 +116,8 @@ export default function PickupDayFinder({ compact = false }: PickupDayFinderProp
           )}
 
           {!compact && (
-            <div className="rounded-lg bg-charcoal-light p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+            <div className="rounded bg-charcoal-light p-4">
+              <p className="overline-label">
                 Reminders
               </p>
               <ul className="mt-2 space-y-1 text-sm text-gray-300">

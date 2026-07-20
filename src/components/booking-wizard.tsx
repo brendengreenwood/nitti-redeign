@@ -17,6 +17,7 @@ import {
   type CityKey,
 } from "@/lib/data";
 import { saveBooking } from "@/lib/bookings";
+import Icon from "@/components/icons";
 
 const CITY_STORAGE_KEY = "nitti-selected-city";
 
@@ -186,10 +187,10 @@ export default function BookingWizard() {
   if (submitted) {
     return (
       <div className="mx-auto max-w-lg px-4 py-10 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-trust text-3xl">
-          ✓
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-trust">
+          <Icon name="check" className="h-8 w-8 text-white" />
         </div>
-        <h1 className="mt-5 font-slab text-3xl font-bold text-white">
+        <h1 className="mt-5 font-display text-3xl font-bold uppercase text-white">
           Done. That&apos;s one less thing.
         </h1>
         <p className="mt-3 text-gray-400">
@@ -216,22 +217,22 @@ export default function BookingWizard() {
           .
         </p>
 
-        <div className="mt-6 rounded-xl bg-charcoal-light p-5 text-left">
+        <div className="mt-6 rounded bg-charcoal-light p-5 text-left">
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
             Before pickup day
           </p>
           <ul className="mt-2 space-y-2 text-sm text-gray-300">
             {service === "yard" ? (
               <>
-                <li>🍂 Use compostable bags — no plastic</li>
-                <li>🕕 Bags at the curb by 6:30 AM</li>
-                <li>🚫 No dirt, sod, rocks, or branches over 2&quot;</li>
+                <li>— Compostable bags only, no plastic</li>
+                <li>— Bags at the curb by 6:30 AM</li>
+                <li>— No dirt, sod, rocks, or branches over 2&quot;</li>
               </>
             ) : (
               <>
-                <li>🕖 Items outside &amp; curb-accessible by {BULK_PICKUP.itemsOutBy}</li>
-                <li>📱 We&apos;ll {textUpdates ? "text" : "call"} to confirm the final price</li>
-                <li>❄️ Doors off fridges &amp; freezers, please</li>
+                <li>— Items outside &amp; curb-accessible by {BULK_PICKUP.itemsOutBy}</li>
+                <li>— We&apos;ll {textUpdates ? "text" : "call"} to confirm the final price</li>
+                <li>— Doors off fridges &amp; freezers</li>
               </>
             )}
           </ul>
@@ -247,9 +248,9 @@ export default function BookingWizard() {
               `Estimated total $${estimate}. Questions? ${COMPANY.phone}`
             )}
             download="nitti-pickup.ics"
-            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover sm:w-auto"
+            className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover sm:w-auto"
           >
-            📅 Put it on the family calendar
+            <Icon name="calendar" className="h-5 w-5" /> Put it on the family calendar
           </a>
         )}
 
@@ -268,7 +269,7 @@ export default function BookingWizard() {
 
         <Link
           href="/account"
-          className="mt-8 inline-block rounded-lg border border-gray-600 px-6 py-3 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
+          className="mt-8 inline-block rounded border border-gray-600 px-6 py-3 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
         >
           See it in My Nitti →
         </Link>
@@ -304,11 +305,11 @@ export default function BookingWizard() {
       )}
 
       {moment && step >= 1 && step <= 2 && (
-        <div className="mb-5 flex items-start gap-3 rounded-xl bg-charcoal-light p-3">
-          <span className="text-xl">{moment.emoji}</span>
+        <div className="mb-5 flex items-start gap-3 rounded bg-charcoal-light p-3">
+          <Icon name={moment.icon} className="h-6 w-6 shrink-0 text-gold" />
           <p className="text-sm text-gray-400">
             <span className="font-semibold text-white">{moment.label}.</span>{" "}
-            We prefilled the usual suspects — adjust anything, no judgment.
+            We prefilled the usual suspects. Adjust anything.
           </p>
         </div>
       )}
@@ -316,7 +317,7 @@ export default function BookingWizard() {
       {/* Step 0: service */}
       {step === 0 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             What happened?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -334,9 +335,9 @@ export default function BookingWizard() {
                   if (m.bags) setBagCount(m.bags);
                   setStep(1);
                 }}
-                className="flex items-center gap-3 rounded-xl border border-gray-700 bg-charcoal-light px-4 py-3 text-left transition-colors hover:border-gold active:scale-[0.99]"
+                className="flex items-center gap-3 rounded border border-gray-700 bg-charcoal-light px-4 py-3 text-left transition-colors hover:border-gold active:scale-[0.99]"
               >
-                <span className="text-2xl">{m.emoji}</span>
+                <Icon name={m.icon} className="h-6 w-6 shrink-0 text-gold" />
                 <span>
                   <span className="block text-sm font-semibold text-white">
                     {m.label}
@@ -360,10 +361,10 @@ export default function BookingWizard() {
                 setBagCount(3);
                 setStep(1);
               }}
-              className="rounded-2xl border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"
+              className="rounded border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"
             >
-              <span className="text-3xl">🍂</span>
-              <p className="mt-2 font-slab text-lg font-semibold text-white">
+              <Icon name="leaf" className="h-8 w-8 text-gold" />
+              <p className="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-white">
                 Yard waste bags
               </p>
               <p className="mt-1 text-sm text-gray-400">
@@ -378,10 +379,10 @@ export default function BookingWizard() {
                 setItems({});
                 setStep(1);
               }}
-              className="rounded-2xl border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"
+              className="rounded border border-gray-700 bg-charcoal-light p-5 text-left transition-colors hover:border-gold active:scale-[0.99]"
             >
-              <span className="text-3xl">🛋️</span>
-              <p className="mt-2 font-slab text-lg font-semibold text-white">
+              <Icon name="couch" className="h-8 w-8 text-gold" />
+              <p className="mt-2 font-display text-lg font-semibold uppercase tracking-wide text-white">
                 Big stuff
               </p>
               <p className="mt-1 text-sm text-gray-400">
@@ -397,7 +398,7 @@ export default function BookingWizard() {
       {/* Step 1: city */}
       {step === 1 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Where&apos;s home?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -408,7 +409,7 @@ export default function BookingWizard() {
               <button
                 key={c.key}
                 onClick={() => selectCity(c.key)}
-                className={`rounded-xl border px-3 py-4 text-sm font-medium transition-colors active:scale-[0.98] ${
+                className={`rounded border px-3 py-4 text-sm font-medium transition-colors active:scale-[0.98] ${
                   city === c.key
                     ? "border-gold bg-gold/10 text-gold"
                     : "border-gray-700 bg-charcoal-light text-gray-300 hover:border-gold hover:text-gold"
@@ -431,7 +432,7 @@ export default function BookingWizard() {
       {/* Step 2: details */}
       {step === 2 && service === "yard" && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             How many bags?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -440,8 +441,8 @@ export default function BookingWizard() {
           </p>
 
           {!inSeason && (
-            <div className="mt-4 rounded-lg border border-gold/40 bg-gold-light p-3 text-sm font-medium text-gray-800">
-              ⚠️ Yard waste season is {YARD_WASTE.seasonStart} –{" "}
+            <div className="mt-4 rounded border border-gold/40 bg-gold-light p-3 text-sm font-medium text-gray-800">
+              Heads up: yard waste season is {YARD_WASTE.seasonStart} –{" "}
               {YARD_WASTE.seasonEnd}. You can still book — we&apos;ll schedule
               it for the start of the season.
             </div>
@@ -470,9 +471,9 @@ export default function BookingWizard() {
             </button>
           </div>
 
-          <div className="mt-8 rounded-xl bg-charcoal-light p-4 text-sm text-gray-400">
+          <div className="mt-8 rounded bg-charcoal-light p-4 text-sm text-gray-400">
             <p>
-              🍂 Doing this all season? The{" "}
+              Doing this all season? The{" "}
               <span className="font-semibold text-white">
                 seasonal cart plan
               </span>{" "}
@@ -489,7 +490,7 @@ export default function BookingWizard() {
 
       {step === 2 && service === "bulk" && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             What&apos;s going?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
@@ -504,7 +505,7 @@ export default function BookingWizard() {
               return (
                 <div
                   key={item.key}
-                  className={`rounded-xl border p-3 transition-colors ${
+                  className={`rounded border p-3 transition-colors ${
                     selected
                       ? "border-gold bg-gold/10"
                       : "border-gray-700 bg-charcoal-light"
@@ -514,7 +515,7 @@ export default function BookingWizard() {
                     onClick={() => toggleItem(item.key)}
                     className="w-full text-left"
                   >
-                    <span className="text-2xl">{item.emoji}</span>
+                    <Icon name={item.icon} className="h-6 w-6 text-gold" />
                     <p
                       className={`mt-1 text-sm font-medium ${
                         selected ? "text-white" : "text-gray-300"
@@ -527,7 +528,7 @@ export default function BookingWizard() {
                     </p>
                   </button>
                   {selected && (
-                    <div className="mt-2 flex items-center justify-between rounded-lg bg-charcoal px-2 py-1">
+                    <div className="mt-2 flex items-center justify-between rounded bg-charcoal px-2 py-1">
                       <button
                         onClick={() => bumpItem(item.key, -1)}
                         className="px-2 py-1 text-lg text-gray-300"
@@ -569,8 +570,8 @@ export default function BookingWizard() {
           )}
 
           {itemCount >= 6 && (
-            <p className="mt-4 rounded-lg bg-charcoal-light p-3 text-sm text-gray-400">
-              💡 That&apos;s a lot of stuff — a{" "}
+            <p className="mt-4 rounded bg-charcoal-light p-3 text-sm text-gray-400">
+              That&apos;s a lot of stuff — a{" "}
               <Link href="/services#roll-off" className="font-medium text-gold">
                 roll-off dumpster
               </Link>{" "}
@@ -583,13 +584,13 @@ export default function BookingWizard() {
       {/* Step 3: contact */}
       {step === 3 && (
         <div>
-          <h1 className="font-slab text-2xl font-bold text-white">
+          <h1 className="font-display text-3xl font-bold uppercase text-white">
             Almost done
           </h1>
           {pickupDate && (
-            <div className="mt-4 rounded-xl border border-green-trust bg-green-trust/15 p-4">
+            <div className="mt-4 rounded border border-green-trust bg-green-trust/15 p-4">
               <p className="text-sm text-gray-300">
-                {service === "yard" ? "🍂 Bags picked up" : "🛋️ Crew arrives"}{" "}
+                {service === "yard" ? "Bags picked up" : "Crew arrives"}{" "}
                 <span className="font-semibold text-white">
                   {formatDate(pickupDate)}
                 </span>
@@ -602,7 +603,7 @@ export default function BookingWizard() {
               )}
               {holiday && (
                 <p className="mt-1 text-xs text-gray-400">
-                  ⚠️ {holiday.name} may push pickups back one day.
+                  Note: {holiday.name} may push pickups back one day.
                 </p>
               )}
             </div>
@@ -634,14 +635,14 @@ export default function BookingWizard() {
               autoComplete="street-address"
               className="form-input py-3"
             />
-            <label className="flex items-center gap-3 rounded-lg bg-charcoal-light p-3 text-sm text-gray-300">
+            <label className="flex items-center gap-3 rounded bg-charcoal-light p-3 text-sm text-gray-300">
               <input
                 type="checkbox"
                 checked={textUpdates}
                 onChange={(e) => setTextUpdates(e.target.checked)}
                 className="h-5 w-5 accent-[#f5a623]"
               />
-              Text me a reminder the night before 🙏
+              Text me a reminder the night before
             </label>
           </div>
 
@@ -669,7 +670,7 @@ export default function BookingWizard() {
             {step >= 2 && (
               <button
                 onClick={goNext}
-                className="flex-1 rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover active:scale-[0.98] disabled:opacity-40"
+                className="flex-1 bg-gold px-6 py-3.5 font-display text-base font-semibold uppercase tracking-widest text-charcoal transition-colors hover:bg-gold-hover active:scale-[0.98] disabled:opacity-40"
               >
                 {step === 3 ? "Book it" : "Continue"}
               </button>

@@ -24,7 +24,7 @@ export default function ServicesPage() {
     <>
       <section className="bg-charcoal px-4 py-14">
         <div className="mx-auto max-w-4xl text-center xl:max-w-5xl">
-          <h1 className="font-slab text-3xl font-bold text-white sm:text-4xl xl:text-5xl">
+          <h1 className="font-display text-3xl font-bold text-white sm:text-4xl xl:text-5xl">
             Services
           </h1>
           <p className="mt-3 text-gray-400">
@@ -56,7 +56,7 @@ export default function ServicesPage() {
       <section id="trash" className="scroll-mt-20 border-t border-gray-800 px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Residential</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">
             Curbside Trash Pickup
           </h2>
           <p className="mt-3 text-gray-400">
@@ -68,7 +68,7 @@ export default function ServicesPage() {
             {TRASH_PLANS.map((plan) => (
               <div
                 key={plan.label}
-                className={`relative rounded-xl border p-5 text-center ${
+                className={`relative rounded border p-5 text-center ${
                   plan.popular
                     ? "border-gold bg-gold/10"
                     : "border-gray-700 bg-charcoal-light"
@@ -88,8 +88,8 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          <div className="mt-8 rounded-lg border border-gray-700 bg-charcoal-light p-5">
-            <h3 className="font-slab text-sm font-semibold text-white">
+          <div className="mt-8 rounded border border-gray-700 bg-charcoal-light p-5">
+            <h3 className="font-display text-sm font-semibold text-white">
               Pickup Rules
             </h3>
             <ul className="mt-2 grid gap-x-6 gap-y-1 text-sm text-gray-400 sm:grid-cols-2">
@@ -103,13 +103,13 @@ export default function ServicesPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/sign-up"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Sign Up for Service
             </Link>
             <Link
               href="/contact#quote"
-              className="rounded-lg border border-gray-600 px-5 py-2.5 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
+              className="rounded border border-gray-600 px-5 py-2.5 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
             >
               Request a Quote
             </Link>
@@ -120,7 +120,7 @@ export default function ServicesPage() {
       <section id="recycling" className="scroll-mt-20 border-t border-gray-800 bg-charcoal-light px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Included with Trash</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">Recycling</h2>
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">Recycling</h2>
           <p className="mt-3 text-gray-400">
             65-gallon recycling cart included with every trash plan. Single-stream
             — mix everything together, no sorting required. Just rinse your
@@ -128,7 +128,7 @@ export default function ServicesPage() {
           </p>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border border-gray-700 bg-charcoal p-6">
+            <div className="rounded border border-gray-700 bg-charcoal p-6">
               <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-green-trust">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -153,7 +153,7 @@ export default function ServicesPage() {
               </div>
             </div>
 
-            <div className="rounded-xl border border-red-900/50 bg-red-950/30 p-6">
+            <div className="rounded border border-red-900/50 bg-red-950/30 p-6">
               <h3 className="mb-4 flex items-center gap-2 text-sm font-semibold text-red-400">
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -170,8 +170,8 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-lg border border-gray-700 bg-charcoal p-5">
-            <h3 className="font-slab text-sm font-semibold text-white">
+          <div className="mt-6 rounded border border-gray-700 bg-charcoal p-5">
+            <h3 className="font-display text-sm font-semibold text-white">
               Common Questions
             </h3>
             <dl className="mt-3 space-y-3 text-sm">
@@ -208,14 +208,14 @@ export default function ServicesPage() {
       <section id="yard-waste" className="scroll-mt-20 border-t border-gray-800 px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Seasonal: {YARD_WASTE.seasonStart} – {YARD_WASTE.seasonEnd}</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">Yard Waste</h2>
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">Yard Waste</h2>
           <p className="mt-3 text-gray-400">
             Composting collection runs mid-April through mid-November. Two
             options to fit your needs.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-gold bg-gold/10 p-6">
+            <div className="rounded border border-gold bg-gold/10 p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-gold">
                 Seasonal Plan
               </p>
@@ -231,7 +231,7 @@ export default function ServicesPage() {
                 itself at about 1 bag per week.
               </p>
             </div>
-            <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
+            <div className="rounded border border-gray-700 bg-charcoal-light p-6">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                 On-Call Bags
               </p>
@@ -268,7 +268,7 @@ export default function ServicesPage() {
           <div className="mt-6">
             <Link
               href="/book?service=yard"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Book Bag Pickup
             </Link>
@@ -279,7 +279,7 @@ export default function ServicesPage() {
       <section id="bulk-pickup" className="scroll-mt-20 border-t border-gray-800 bg-charcoal-light px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Episodic</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">
             Bulk Item Pickup
           </h2>
           <p className="mt-3 text-gray-400">
@@ -303,7 +303,7 @@ export default function ServicesPage() {
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-gray-700 bg-charcoal p-5 text-center">
+            <div className="rounded border border-gray-700 bg-charcoal p-5 text-center">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                 Residential Trip Fee
               </p>
@@ -312,7 +312,7 @@ export default function ServicesPage() {
               </p>
               <p className="text-xs text-gray-500">+ per-item charges</p>
             </div>
-            <div className="rounded-xl border border-gray-700 bg-charcoal p-5 text-center">
+            <div className="rounded border border-gray-700 bg-charcoal p-5 text-center">
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                 Commercial Trip Fee
               </p>
@@ -334,7 +334,7 @@ export default function ServicesPage() {
           <div className="mt-6">
             <Link
               href="/book?service=bulk"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Schedule a Bulk Pickup
             </Link>
@@ -345,7 +345,7 @@ export default function ServicesPage() {
       <section id="commercial" className="scroll-mt-20 border-t border-gray-800 px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Businesses & Properties</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">
             Commercial &amp; Multi-Family
           </h2>
           <p className="mt-3 text-gray-400">
@@ -355,8 +355,8 @@ export default function ServicesPage() {
           </p>
 
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
-              <h3 className="font-slab font-semibold text-white">For Businesses</h3>
+            <div className="rounded border border-gray-700 bg-charcoal-light p-6">
+              <h3 className="font-display font-semibold text-white">For Businesses</h3>
               <ul className="mt-3 space-y-2 text-sm text-gray-400">
                 <li>Restaurants, retail, offices, industrial sites</li>
                 <li>Flexible pickup frequency</li>
@@ -364,8 +364,8 @@ export default function ServicesPage() {
                 <li>Local team — not a national call center</li>
               </ul>
             </div>
-            <div className="rounded-xl border border-gray-700 bg-charcoal-light p-6">
-              <h3 className="font-slab font-semibold text-white">
+            <div className="rounded border border-gray-700 bg-charcoal-light p-6">
+              <h3 className="font-display font-semibold text-white">
                 For Multi-Family Properties
               </h3>
               <ul className="mt-3 space-y-2 text-sm text-gray-400">
@@ -377,7 +377,7 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-lg border border-gold/30 bg-gold/10 p-5">
+          <div className="mt-6 rounded border border-gold/30 bg-gold/10 p-5">
             <p className="text-sm text-gray-300">
               <span className="font-semibold text-gold">Why local matters:</span> When
               you call, you reach our Rosemount office — not a call center in
@@ -389,7 +389,7 @@ export default function ServicesPage() {
           <div className="mt-6">
             <Link
               href="/contact#quote"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Request a Custom Quote
             </Link>
@@ -400,7 +400,7 @@ export default function ServicesPage() {
       <section id="roll-off" className="scroll-mt-20 border-t border-gray-800 bg-charcoal-light px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Via Lightning Disposal</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">
             Roll-Off Dumpster Rental
           </h2>
           <p className="mt-3 text-gray-400">
@@ -421,7 +421,7 @@ export default function ServicesPage() {
             {ROLLOFF_SIZES.map((size) => (
               <div
                 key={size.yards}
-                className="rounded-xl border border-gray-700 bg-charcoal p-5"
+                className="rounded border border-gray-700 bg-charcoal p-5"
               >
                 <div className="flex items-baseline gap-2">
                   <span className="text-2xl font-bold text-white">
@@ -435,7 +435,7 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          <div className="mt-6 rounded-lg border border-gold/30 bg-gold/10 p-5">
+          <div className="mt-6 rounded border border-gold/30 bg-gold/10 p-5">
             <p className="text-sm font-medium text-gray-300">
               Need it today? Same-day delivery is often available. Call{" "}
               <a
@@ -450,7 +450,7 @@ export default function ServicesPage() {
           <div className="mt-6">
             <Link
               href="/contact#quote"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Get a Dumpster Quote
             </Link>
@@ -461,7 +461,7 @@ export default function ServicesPage() {
       <section id="event-boxes" className="scroll-mt-20 border-t border-gray-800 px-4 py-16">
         <div className="mx-auto max-w-4xl xl:max-w-5xl">
           <SectionLabel>Parties & Events</SectionLabel>
-          <h2 className="mt-1 font-slab text-2xl font-semibold text-white">
+          <h2 className="mt-1 font-display text-2xl font-semibold text-white">
             Trash Event Boxes
           </h2>
           <p className="mt-3 text-gray-400">
@@ -488,8 +488,8 @@ export default function ServicesPage() {
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-gray-700 bg-charcoal-light p-5">
-              <p className="font-slab text-sm font-semibold text-white">Pricing</p>
+            <div className="rounded border border-gray-700 bg-charcoal-light p-5">
+              <p className="font-display text-sm font-semibold text-white">Pricing</p>
               <ul className="mt-2 space-y-1 text-sm text-gray-400">
                 <li>
                   Boxes: ${EVENT_BOXES.boxPrice} + tax each ({EVENT_BOXES.boxDimensions})
@@ -498,8 +498,8 @@ export default function ServicesPage() {
                 <li>You provide your own 55-gallon bags</li>
               </ul>
             </div>
-            <div className="rounded-xl border border-gray-700 bg-charcoal-light p-5">
-              <p className="font-slab text-sm font-semibold text-white">
+            <div className="rounded border border-gray-700 bg-charcoal-light p-5">
+              <p className="font-display text-sm font-semibold text-white">
                 How many do I need?
               </p>
               <table className="mt-2 w-full text-sm">
@@ -526,7 +526,7 @@ export default function ServicesPage() {
           <div className="mt-6">
             <Link
               href="/contact#event-boxes"
-              className="rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
+              className="rounded bg-gold px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-charcoal hover:bg-gold-hover"
             >
               Order Event Boxes
             </Link>
@@ -555,11 +555,11 @@ function Step({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-gray-700 bg-charcoal p-4">
+    <div className="rounded border border-gray-700 bg-charcoal p-4">
       <div className="mb-2 flex h-7 w-7 items-center justify-center rounded-full bg-gold text-xs font-bold text-charcoal">
         {number}
       </div>
-      <p className="font-slab text-sm font-semibold text-white">{title}</p>
+      <p className="font-display text-sm font-semibold text-white">{title}</p>
       <p className="mt-1 text-xs text-gray-500">{children}</p>
     </div>
   );
@@ -577,7 +577,7 @@ function AcceptedRejectedList({
   const isAccepted = variant === "accepted";
   return (
     <div
-      className={`rounded-xl border p-6 ${
+      className={`rounded border p-6 ${
         isAccepted
           ? "border-gray-700 bg-charcoal-light"
           : "border-red-900/50 bg-red-950/30"

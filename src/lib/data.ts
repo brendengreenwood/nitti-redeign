@@ -206,21 +206,21 @@ export const TESTIMONIALS = [
 export interface BulkItem {
   key: string;
   label: string;
-  emoji: string;
+  icon: string;
   /** Typical per-item charge estimate; office confirms final price. */
   typicalPrice: number;
 }
 
 export const BULK_ITEMS: BulkItem[] = [
-  { key: "couch", label: "Couch / sofa", emoji: "🛋️", typicalPrice: 30 },
-  { key: "mattress", label: "Mattress / box spring", emoji: "🛏️", typicalPrice: 25 },
-  { key: "chair", label: "Recliner / big chair", emoji: "🪑", typicalPrice: 20 },
-  { key: "appliance", label: "Appliance", emoji: "🧊", typicalPrice: 35 },
-  { key: "tv", label: "TV / electronics", emoji: "📺", typicalPrice: 30 },
-  { key: "grill", label: "Grill / patio stuff", emoji: "🔥", typicalPrice: 20 },
-  { key: "playset", label: "Swing set / kid gear", emoji: "🛝", typicalPrice: 25 },
-  { key: "carpet", label: "Rolled carpet / rug", emoji: "🧻", typicalPrice: 15 },
-  { key: "other", label: "Something else", emoji: "📦", typicalPrice: 25 },
+  { key: "couch", label: "Couch / sofa", icon: "couch", typicalPrice: 30 },
+  { key: "mattress", label: "Mattress / box spring", icon: "bed", typicalPrice: 25 },
+  { key: "chair", label: "Recliner / big chair", icon: "chair", typicalPrice: 20 },
+  { key: "appliance", label: "Appliance", icon: "fridge", typicalPrice: 35 },
+  { key: "tv", label: "TV / electronics", icon: "tv", typicalPrice: 30 },
+  { key: "grill", label: "Grill / patio stuff", icon: "flame", typicalPrice: 20 },
+  { key: "playset", label: "Swing set / kid gear", icon: "swing", typicalPrice: 25 },
+  { key: "carpet", label: "Rolled carpet / rug", icon: "carpet", typicalPrice: 15 },
+  { key: "other", label: "Something else", icon: "box", typicalPrice: 25 },
 ];
 
 /**
@@ -230,7 +230,7 @@ export const BULK_ITEMS: BulkItem[] = [
  */
 export interface LifeMoment {
   key: string;
-  emoji: string;
+  icon: string;
   label: string;
   description: string;
   service: "yard" | "bulk";
@@ -241,7 +241,7 @@ export interface LifeMoment {
 export const LIFE_MOMENTS: LifeMoment[] = [
   {
     key: "outgrown",
-    emoji: "🧸",
+    icon: "swing",
     label: "The kids outgrew it",
     description: "Crib, bunk bed, swing set, ride-on everything",
     service: "bulk",
@@ -249,7 +249,7 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
   {
     key: "new-furniture",
-    emoji: "📦",
+    icon: "couch",
     label: "New couch is coming",
     description: "The old one needs to be gone before the delivery truck",
     service: "bulk",
@@ -257,7 +257,7 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
   {
     key: "yard-day",
-    emoji: "🍂",
+    icon: "leaf",
     label: "Yard day got out of hand",
     description: "A wall of bags lined up on the driveway",
     service: "yard",
@@ -265,7 +265,7 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
   {
     key: "appliance-died",
-    emoji: "🧊",
+    icon: "fridge",
     label: "An appliance gave up",
     description: "Fridge, washer, dryer — we haul it, doors off please",
     service: "bulk",
@@ -273,7 +273,7 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
   {
     key: "mattress-upgrade",
-    emoji: "🛏️",
+    icon: "bed",
     label: "Mattress upgrade",
     description: "The old one's been leaning on the guest room wall",
     service: "bulk",
@@ -281,7 +281,7 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
   {
     key: "garage-purge",
-    emoji: "🚗",
+    icon: "box",
     label: "Garage purge weekend",
     description: "The pile that was “going to Goodwill” since 2023",
     service: "bulk",
