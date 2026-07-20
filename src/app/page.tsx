@@ -16,24 +16,22 @@ export default function Home() {
       <section className="bg-charcoal px-4 pb-10 pt-14 sm:pb-16 sm:pt-20">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="font-display text-5xl font-bold uppercase leading-[0.95] text-white sm:text-6xl">
-            Kids grow.
+            Trash. Recycling.
             <br />
-            Couches die.
+            Yard waste. Big stuff.
             <br />
-            Leaves keep coming.
-            <br />
-            <span className="text-gold">We haul all of it.</span>
+            <span className="text-gold">Booked from your phone.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-md text-base text-gray-400 sm:text-lg">
-            Book a pickup from your phone in under a minute. Trucks, not call
-            trees. Family-owned in the south metro since {COMPANY.founded}.
+            Weekly pickup and one-off hauls in the south metro. Family-owned
+            since {COMPANY.founded}.
           </p>
         </div>
 
         {/* Life-moment entry points */}
         <div className="mx-auto mt-10 max-w-2xl">
           <p className="overline-label text-center">
-            What happened at your house
+            What needs to go
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {LIFE_MOMENTS.map((m) => (
@@ -68,7 +66,7 @@ export default function Home() {
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500">
-          Rather talk? Call{" "}
+          Questions? Call{" "}
           <a href={`tel:${COMPANY.phone}`} className="font-semibold text-gold">
             {COMPANY.phone}
           </a>
@@ -81,26 +79,21 @@ export default function Home() {
       {/* Built for the mental load */}
       <section className="px-4 py-14">
         <div className="mx-auto max-w-2xl">
-          <p className="overline-label text-center">How it works</p>
+          <p className="overline-label text-center">Three steps</p>
           <h2 className="mt-1 text-center font-display text-3xl font-semibold uppercase text-white">
-            Built for the mental load
+            How it works
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-center text-sm text-gray-400">
-            You&apos;ve got 400 things in your head. This shouldn&apos;t be one
-            of them.
-          </p>
           <div className="mt-10 space-y-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0">
-            <HowStep number="01" title="Book whenever">
-              9:47 PM after bedtime works. Tell us what happened and where you
-              live — we already know your pickup day.
+            <HowStep number="01" title="Book online">
+              Pick what&apos;s going and your city. Takes about a minute.
             </HowStep>
             <HowStep number="02" title="We confirm the day">
-              Exact date and price before you tap book. On the family calendar,
-              text the night before.
+              Exact date and price before you book. Text reminder the night
+              before if you want one.
             </HowStep>
-            <HowStep number="03" title="Curb it. Done.">
-              Out by 6:30 AM ({BULK_PICKUP.itemsOutBy} for big items). Gone
-              while you do the school run.
+            <HowStep number="03" title="Set it out">
+              Curb by 6:30 AM ({BULK_PICKUP.itemsOutBy} for big items). We haul
+              it.
             </HowStep>
           </div>
         </div>
@@ -109,20 +102,19 @@ export default function Home() {
       {/* For the first-house comparison shoppers */}
       <section className="border-t border-gray-800 bg-charcoal-light px-4 py-14">
         <div className="mx-auto max-w-2xl">
-          <p className="overline-label text-center">Do the math</p>
+          <p className="overline-label text-center">Compare</p>
           <h2 className="mt-1 text-center font-display text-3xl font-semibold uppercase text-white">
-            First house? Congrats.
+            No contract. Flat pricing.
           </h2>
           <p className="mx-auto mt-2 max-w-md text-center text-sm text-gray-400">
-            Picking a hauler is the least romantic part of homeownership, and
-            you have ten tabs open. Here&apos;s ours, straight:
+            How we stack up against the national haulers:
           </p>
 
           <div className="mt-8 overflow-hidden border border-gray-700">
             <div className="grid grid-cols-[1fr_1fr_1fr] border-b-2 border-gold/60 bg-charcoal px-4 py-3 font-display text-xs font-semibold uppercase tracking-[0.2em]">
               <span className="text-gray-500">&nbsp;</span>
               <span className="text-gold">Nitti</span>
-              <span className="text-gray-500">The big guys</span>
+              <span className="text-gray-500">Typical hauler</span>
             </div>
             {COMPARISON.map((row, i) => (
               <div
@@ -138,16 +130,12 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="mt-4 text-center text-xs text-gray-500">
-            No contract means we earn your house every single week. That&apos;s
-            the deal.
-          </p>
           <div className="mt-6 text-center">
             <Link
               href="/welcome"
               className="inline-block bg-gold px-8 py-3.5 font-display text-base font-semibold uppercase tracking-widest text-charcoal transition-colors hover:bg-gold-hover"
             >
-              Make It Official — 2 Min Setup
+              Sign Up
             </Link>
           </div>
         </div>
@@ -163,9 +151,9 @@ export default function Home() {
       {/* Social proof */}
       <section className="border-t border-gray-800 px-4 py-14">
         <div className="mx-auto max-w-4xl">
-          <p className="overline-label text-center">South metro says</p>
+          <p className="overline-label text-center">Reviews</p>
           <h2 className="mt-1 text-center font-display text-3xl font-semibold uppercase text-white">
-            The neighbors already switched
+            What customers say
           </h2>
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             {TESTIMONIALS.map((t) => (
@@ -189,7 +177,7 @@ export default function Home() {
       <section className="border-t border-gray-800 px-4 py-16">
         <div className="mx-auto max-w-md text-center">
           <h2 className="font-display text-3xl font-semibold uppercase text-white">
-            That pile isn&apos;t going to haul itself
+            Need something hauled?
           </h2>
           <Link
             href="/book"

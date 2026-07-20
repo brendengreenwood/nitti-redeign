@@ -51,10 +51,10 @@ export default function LoginForm() {
   return (
     <div className="mx-auto max-w-sm px-4 py-12">
       <h1 className="text-center font-display text-3xl font-bold text-white">
-        Welcome back 👋
+        Log in
       </h1>
       <p className="mt-2 text-center text-sm text-gray-400">
-        Log in with your mobile number — no password to forget.
+        We&apos;ll text a code to your mobile number.
       </p>
 
       {!codeSent ? (
@@ -122,7 +122,7 @@ export default function LoginForm() {
       <p className="mt-10 text-center text-sm text-gray-500">
         New house?{" "}
         <Link href="/welcome" className="font-medium text-gold">
-          Set up service in 2 minutes →
+          Set up service →
         </Link>
       </p>
     </div>

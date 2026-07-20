@@ -138,7 +138,7 @@ export default function AccountDashboard() {
           My Nitti
         </h1>
         <p className="mt-2 text-sm text-gray-400">
-          Trash day, pickups, and the bill — your whole house, one screen.
+          Pickup schedule, orders, and billing.
         </p>
         <div className="mt-8 flex flex-col gap-3">
           <Link
@@ -195,10 +195,10 @@ export default function AccountDashboard() {
               className="mt-0.5 text-left"
             >
               <h1 className="font-display text-3xl font-bold uppercase text-white">
-                {houseName ?? "Welcome home"}
+                {houseName ?? "My house"}
               </h1>
               <span className="text-xs text-gray-500 underline decoration-dotted">
-                {houseName ? "rename your house" : "first house? name it — it's a big deal"}
+                {houseName ? "rename" : "add a nickname (optional)"}
               </span>
             </button>
           )}
@@ -365,7 +365,7 @@ export default function AccountDashboard() {
               onClick={() => setEnablingAutopay(true)}
               className="mt-3 w-full rounded border border-gold/50 bg-gold/10 px-4 py-3 text-sm font-semibold text-gold transition-colors hover:bg-gold/20"
             >
-              Turn on autopay — stop tracking due dates
+              Turn on autopay
             </button>
           ))}
 
@@ -404,8 +404,7 @@ export default function AccountDashboard() {
       {/* Household */}
       {session.partnerPhone && (
         <p className="mt-4 rounded bg-charcoal-light p-3 text-center text-xs text-gray-500">
-          Two adults on this account — either number logs in and can order
-          pickups.
+          Both numbers on this account can log in and order pickups.
         </p>
       )}
 
@@ -415,8 +414,7 @@ export default function AccountDashboard() {
           Same trucks. Same phone number. Since {COMPANY.founded}.
         </p>
         <p className="mt-1 text-sm text-gray-400">
-          If anything&apos;s ever off, a person in {COMPANY.address.city} picks
-          up:{" "}
+          Questions? Call{" "}
           <a href={`tel:${COMPANY.phone}`} className="font-medium text-gold">
             {COMPANY.phone}
           </a>

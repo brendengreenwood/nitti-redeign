@@ -191,7 +191,7 @@ export default function BookingWizard() {
           <Icon name="check" className="h-8 w-8 text-white" />
         </div>
         <h1 className="mt-5 font-display text-3xl font-bold uppercase text-white">
-          Done. That&apos;s one less thing.
+          Booked.
         </h1>
         <p className="mt-3 text-gray-400">
           {service === "yard" ? (
@@ -250,7 +250,7 @@ export default function BookingWizard() {
             download="nitti-pickup.ics"
             className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover sm:w-auto"
           >
-            <Icon name="calendar" className="h-5 w-5" /> Put it on the family calendar
+            <Icon name="calendar" className="h-5 w-5" /> Add to calendar
           </a>
         )}
 
@@ -309,7 +309,7 @@ export default function BookingWizard() {
           <Icon name={moment.icon} className="h-6 w-6 shrink-0 text-gold" />
           <p className="text-sm text-gray-400">
             <span className="font-semibold text-white">{moment.label}.</span>{" "}
-            We prefilled the usual suspects. Adjust anything.
+            We prefilled the usual items. Adjust as needed.
           </p>
         </div>
       )}
@@ -318,10 +318,10 @@ export default function BookingWizard() {
       {step === 0 && (
         <div>
           <h1 className="font-display text-3xl font-bold uppercase text-white">
-            What happened?
+            What needs to go?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Takes about a minute, whether it&apos;s 7 AM or way past bedtime.
+            Takes about a minute.
           </p>
 
           <div className="mt-5 grid gap-2">
@@ -386,8 +386,7 @@ export default function BookingWizard() {
                 Big stuff
               </p>
               <p className="mt-1 text-sm text-gray-400">
-                Couches, mattresses, appliances, the swing set nobody uses.
-                Thursdays, ${BULK_PICKUP.residentialTripFee} trip fee + per
+                Couches, mattresses, appliances, furniture. Thursdays, ${BULK_PICKUP.residentialTripFee} trip fee + per
                 item.
               </p>
             </button>
@@ -402,7 +401,7 @@ export default function BookingWizard() {
             Where&apos;s home?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            We&apos;ll figure out your pickup day for you.
+            We&apos;ll look up your pickup day.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             {SERVICE_CITIES.map((c) => (
@@ -473,15 +472,11 @@ export default function BookingWizard() {
 
           <div className="mt-8 rounded bg-charcoal-light p-4 text-sm text-gray-400">
             <p>
-              Doing this all season? The{" "}
-              <span className="font-semibold text-white">
-                seasonal cart plan
-              </span>{" "}
-              (${YARD_WASTE.seasonalPlanPrice}/season,{" "}
-              {YARD_WASTE.seasonalPlanDescription.toLowerCase()}) usually pays
-              for itself.{" "}
+              Regular yard waste? The seasonal plan is $
+              {YARD_WASTE.seasonalPlanPrice}/season (
+              {YARD_WASTE.seasonalPlanDescription.toLowerCase()}).{" "}
               <Link href="/sign-up" className="font-medium text-gold">
-                Add it to your service →
+                Add it →
               </Link>
             </p>
           </div>
@@ -565,7 +560,7 @@ export default function BookingWizard() {
 
           {attemptedNext && !detailsValid && (
             <p className="mt-3 text-sm text-red-400">
-              Pick at least one item to continue.
+              Select at least one item.
             </p>
           )}
 
@@ -648,7 +643,7 @@ export default function BookingWizard() {
 
           {attemptedNext && !contactValid && (
             <p className="mt-3 text-sm text-red-400">
-              Name, mobile number, and address — that&apos;s all we need.
+              Name, mobile number, and address required.
             </p>
           )}
         </div>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
-  COMPANY,
   SERVICE_CITIES,
   TRASH_PLANS,
   YARD_WASTE,
@@ -101,11 +100,10 @@ export default function OnboardingWizard() {
           <Icon name="check" className="h-8 w-8 text-white" />
         </div>
         <h1 className="mt-4 font-display text-3xl font-bold uppercase text-white">
-          Welcome home{houseName.trim() ? `, ${houseName.trim()}` : ""}.
+          You&apos;re set up.
         </h1>
         <p className="mx-auto mt-3 max-w-sm text-gray-400">
-          You&apos;re set up in {cityInfo?.name}. Carts arrive within a week,
-          and your pickup day is{" "}
+          Carts arrive within a week. Pickup day in {cityInfo?.name}:{" "}
           <span className="font-semibold text-white">
             {cityInfo?.pickupDays.join(" & ")}
           </span>
@@ -126,13 +124,13 @@ export default function OnboardingWizard() {
         </p>
         <div className="mt-4 rounded bg-charcoal-light p-4 text-sm text-gray-400">
           {autopayOn ? (
-            <>Autopay is on — you&apos;ll never think about a due date.</>
+            <>Autopay is on.</>
           ) : (
-            <>Autopay is off — you can flip it on anytime in My Nitti.</>
+            <>Autopay is off — turn it on anytime in My Nitti.</>
           )}
           {partnerPhone.trim() && (
             <p className="mt-1">
-              Both of your numbers work — either of you can order pickups.
+              Both numbers can log in and order pickups.
             </p>
           )}
         </div>
@@ -147,7 +145,7 @@ export default function OnboardingWizard() {
             href="/book"
             className="rounded border border-gray-600 px-6 py-4 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
           >
-            Actually — there&apos;s already a couch to get rid of
+            Book a pickup now
           </Link>
         </div>
       </div>
@@ -184,17 +182,16 @@ export default function OnboardingWizard() {
       {step === 0 && (
         <div>
           <h1 className="font-display text-4xl font-bold uppercase leading-none text-white">
-            You bought a house.
+            Set up trash service.
           </h1>
           <p className="mt-2 text-gray-400">
-            Congrats — seriously, that&apos;s huge. Somewhere between the
-            mortgage and the moving boxes, someone has to pick a trash company.
+            Two minutes. Weekly pickup, recycling included.
           </p>
           <div className="mt-5 space-y-3">
             {[
-              ["doc", "The big guys want a 1–2 year contract before the boxes are even unpacked."],
-              ["card", "Then the “fuel & environmental fees” show up on invoice two."],
-              ["phone", "And when a pickup gets missed, you're arguing with a call tree."],
+              ["doc", "No contracts. Leave anytime."],
+              ["card", "No fuel or environmental fees. The price is the price."],
+              ["phone", "A person in Rosemount answers the phone."],
             ].map(([icon, text]) => (
               <div
                 key={text}
@@ -204,16 +201,6 @@ export default function OnboardingWizard() {
                 <p className="text-sm text-gray-300">{text}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-5 rounded border border-gold/40 bg-gold/10 p-4">
-            <p className="text-sm text-gray-300">
-              <span className="font-semibold text-white">
-                We&apos;re the local one.
-              </span>{" "}
-              Flat published prices, no contract, a person in{" "}
-              {COMPANY.address.city} on the phone. Two minutes of setup, then it
-              just&hellip; works.
-            </p>
           </div>
           <p className="mt-4 text-center text-xs text-gray-500">
             Already have service?{" "}
@@ -257,7 +244,7 @@ export default function OnboardingWizard() {
             type="text"
             value={houseName}
             onChange={(e) => setHouseName(e.target.value)}
-            placeholder="Name your house — optional, but it's a big deal"
+            placeholder="House nickname (optional)"
             maxLength={32}
             className="form-input mt-3 py-3"
           />
@@ -294,18 +281,18 @@ export default function OnboardingWizard() {
                     {p.label}
                     {p.popular && (
                       <span className="ml-2 bg-gold px-2 py-0.5 font-display text-[10px] font-bold tracking-widest text-charcoal">
-                        MOST HOUSES
+                        POPULAR
                       </span>
                     )}
                   </span>
                   <span className="text-xs text-gray-500">
                     {p.gallons === 35
-                      ? "Couple, apartment habits"
+                      ? "1–2 people"
                       : p.gallons === 65 && p.count === 1
-                      ? "The family default"
+                      ? "Most popular size"
                       : p.count === 2
-                      ? "Big family, big output"
-                      : "Diapers-and-everything stage"}
+                      ? "Maximum capacity"
+                      : "Large households"}
                   </span>
                 </span>
                 <span className="font-display text-lg font-bold text-white">
@@ -342,7 +329,7 @@ export default function OnboardingWizard() {
             Who&apos;s on the account?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            It&apos;s your house — both names work here.
+            Add a second number and both of you can log in and order pickups.
           </p>
           <div className="mt-5 space-y-3">
             <input
@@ -357,7 +344,7 @@ export default function OnboardingWizard() {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="Your mobile — this is how you'll log in"
+              placeholder="Your mobile (used to log in)"
               autoComplete="tel"
               inputMode="tel"
               className="form-input py-3"
@@ -366,14 +353,10 @@ export default function OnboardingWizard() {
               type="tel"
               value={partnerPhone}
               onChange={(e) => setPartnerPhone(e.target.value)}
-              placeholder="Partner's mobile (optional)"
+              placeholder="Second mobile (optional)"
               inputMode="tel"
               className="form-input py-3"
             />
-            <p className="rounded bg-charcoal-light p-3 text-xs text-gray-500">
-              Add your partner and either of you can log in, order pickups,
-              and see the bill. “Honey, handled” becomes a one-tap thing.
-            </p>
           </div>
           {attempted && !peopleValid && (
             <p className="mt-3 text-sm text-red-400">
@@ -387,11 +370,10 @@ export default function OnboardingWizard() {
       {step === 4 && (
         <div>
           <h1 className="font-display text-3xl font-bold uppercase text-white">
-            Never think about a due date
+            Autopay
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Bills land every two months. Autopay means they also leave on their
-            own.
+            Billed every two months. Autopay is optional.
           </p>
           <label className="mt-5 flex items-center justify-between rounded border border-gray-700 bg-charcoal-light p-4">
             <span className="text-sm font-semibold text-white">
@@ -427,8 +409,8 @@ export default function OnboardingWizard() {
             </>
           ) : (
             <p className="mt-3 rounded bg-charcoal-light p-3 text-xs text-gray-500">
-              No pressure — paper statements and the online portal still work.
-              You can flip this on later in My Nitti.
+              Paper statements and the online portal still work. You can turn
+              this on later in My Nitti.
             </p>
           )}
         </div>
@@ -444,7 +426,7 @@ export default function OnboardingWizard() {
             </div>
           ) : (
             <p className="text-xs text-gray-500">
-              ~2 minutes · no contract, ever
+              About 2 minutes
             </p>
           )}
           <button
