@@ -289,7 +289,56 @@ export const LIFE_MOMENTS: LifeMoment[] = [
   },
 ];
 
+/** Side-by-side answers for households comparison-shopping haulers. */
+export interface ComparisonRow {
+  feature: string;
+  nitti: string;
+  typical: string;
+}
+
+export const COMPARISON: ComparisonRow[] = [
+  {
+    feature: "65-gallon cart, monthly",
+    nitti: "$33 — recycling included",
+    typical: "$40–55, recycling extra",
+  },
+  {
+    feature: "Contract",
+    nitti: "None. Leave anytime",
+    typical: "1–2 years + cancellation fee",
+  },
+  {
+    feature: "Fuel & “environmental” fees",
+    nitti: "None",
+    typical: "$10–20 sneaks onto each invoice",
+  },
+  {
+    feature: "Price after year one",
+    nitti: "Same flat, published price",
+    typical: "Intro rate, then it creeps",
+  },
+  {
+    feature: "Who answers the phone",
+    nitti: "A person in Rosemount",
+    typical: "A national call tree",
+  },
+  {
+    feature: "Big-item pickup",
+    nitti: "Book from your phone, Thursdays",
+    typical: "Call during business hours for a quote",
+  },
+];
+
+/** Sample billing history shown in the My Nitti portal preview. */
+export const SAMPLE_INVOICES = [
+  { period: "May – June 2026", amount: 66, status: "Paid · autopay" },
+  { period: "Bulk pickup — couch & mattress", amount: 55, status: "Paid" },
+  { period: "March – April 2026", amount: 66, status: "Paid · autopay" },
+  { period: "January – February 2026", amount: 66, status: "Paid · autopay" },
+];
+
 export const NAV_LINKS = [
+  { label: "My Nitti", href: "/account" },
   { label: "Services", href: "/services" },
   { label: "Schedule", href: "/schedule" },
   { label: "Contact", href: "/contact" },

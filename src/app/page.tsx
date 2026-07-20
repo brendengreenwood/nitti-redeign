@@ -3,14 +3,12 @@ import PickupDayFinder from "@/components/pickup-day-finder";
 import {
   BULK_PICKUP,
   COMPANY,
+  COMPARISON,
   LIFE_MOMENTS,
   TESTIMONIALS,
-  TRASH_PLANS,
 } from "@/lib/data";
 
 export default function Home() {
-  const popularPlan = TRASH_PLANS.find((p) => p.popular) ?? TRASH_PLANS[0];
-
   return (
     <>
       {/* Hero */}
@@ -100,38 +98,56 @@ export default function Home() {
         </div>
       </section>
 
+      {/* For the first-house comparison shoppers */}
+      <section className="border-t border-gray-800 bg-charcoal-light px-4 py-12">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="text-center font-slab text-2xl font-semibold text-white">
+            First house? Congrats. 🎉
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-gray-400">
+            Picking a trash hauler is the least romantic part of homeownership,
+            and you probably have ten tabs open. Here&apos;s ours, honestly:
+          </p>
+
+          <div className="mt-8 overflow-hidden rounded-2xl border border-gray-700">
+            <div className="grid grid-cols-[1fr_1fr_1fr] bg-charcoal px-4 py-3 text-xs font-semibold uppercase tracking-wider">
+              <span className="text-gray-500">&nbsp;</span>
+              <span className="text-gold">Nitti</span>
+              <span className="text-gray-500">The big guys</span>
+            </div>
+            {COMPARISON.map((row, i) => (
+              <div
+                key={row.feature}
+                className={`grid grid-cols-[1fr_1fr_1fr] gap-2 px-4 py-3 text-xs sm:text-sm ${
+                  i % 2 ? "bg-charcoal" : "bg-charcoal-light"
+                }`}
+              >
+                <span className="font-medium text-gray-400">{row.feature}</span>
+                <span className="font-semibold text-white">✓ {row.nitti}</span>
+                <span className="text-gray-500">{row.typical}</span>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-4 text-center text-xs text-gray-500">
+            No contract means we have to earn your house every single week.
+            That&apos;s the deal.
+          </p>
+          <div className="mt-5 text-center">
+            <Link
+              href="/sign-up"
+              className="inline-block rounded-xl bg-gold px-8 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover"
+            >
+              Make It Official
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Pickup finder */}
       <section id="pickup-finder" className="border-t border-gray-800 px-4 py-12">
         <div className="mx-auto max-w-3xl">
           <PickupDayFinder compact />
-        </div>
-      </section>
-
-      {/* Weekly service upsell */}
-      <section className="border-t border-gray-800 bg-charcoal-light px-4 py-12">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-slab text-2xl font-semibold text-white">
-            Need weekly trash too?
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-gray-400">
-            Most families run the {popularPlan.label.toLowerCase()} cart at $
-            {popularPlan.pricePerMonth}/month — recycling cart included, no
-            sorting drama.
-          </p>
-          <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              href="/sign-up"
-              className="w-full rounded-xl bg-gold px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-charcoal transition-colors hover:bg-gold-hover sm:w-auto"
-            >
-              Sign Up for Service
-            </Link>
-            <Link
-              href="/services"
-              className="w-full rounded-xl border border-gray-600 px-6 py-3.5 text-sm font-medium text-gray-300 transition-colors hover:border-gold hover:text-gold sm:w-auto"
-            >
-              See all services
-            </Link>
-          </div>
         </div>
       </section>
 

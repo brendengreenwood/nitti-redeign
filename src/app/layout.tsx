@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Zilla_Slab } from "next/font/google";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
+import TabBar from "@/components/tab-bar";
 import "./globals.css";
 
 const inter = Inter({
@@ -35,6 +36,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <TabBar />
       </body>
     </html>
   );

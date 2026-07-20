@@ -16,6 +16,7 @@ import {
   isYardWasteSeason,
   type CityKey,
 } from "@/lib/data";
+import { saveBooking } from "@/lib/bookings";
 
 const CITY_STORAGE_KEY = "nitti-selected-city";
 
@@ -161,6 +162,19 @@ export default function BookingWizard() {
         setAttemptedNext(true);
         return;
       }
+      if (pickupDate && cityInfo && service) {
+        saveBooking({
+          id: String(Date.now()),
+          service,
+          cityName: cityInfo.name,
+          dateISO: pickupDate.toISOString(),
+          estimate,
+          summary:
+            service === "yard"
+              ? `${bagCount} yard waste ${bagCount === 1 ? "bag" : "bags"}`
+              : `${itemCount} big ${itemCount === 1 ? "item" : "items"}`,
+        });
+      }
       setSubmitted(true);
       return;
     }
@@ -253,10 +267,10 @@ export default function BookingWizard() {
         </p>
 
         <Link
-          href="/"
+          href="/account"
           className="mt-8 inline-block rounded-lg border border-gray-600 px-6 py-3 text-sm font-medium text-gray-300 hover:border-gold hover:text-gold"
         >
-          Back to home
+          See it in My Nitti →
         </Link>
       </div>
     );
