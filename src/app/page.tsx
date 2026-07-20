@@ -23,8 +23,7 @@ export default function Home() {
             <span className="text-gold">Booked from your phone.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-md text-base text-gray-400 sm:text-lg">
-            Weekly pickup and one-off hauls in the south metro. Family-owned
-            since {COMPANY.founded}.
+            South metro · family-owned since {COMPANY.founded}
           </p>
         </div>
 
@@ -44,13 +43,8 @@ export default function Home() {
                   name={m.icon}
                   className="h-7 w-7 shrink-0 text-gold"
                 />
-                <span>
-                  <span className="block font-display text-base font-semibold uppercase tracking-wide text-white group-hover:text-gold">
-                    {m.label}
-                  </span>
-                  <span className="block text-xs text-gray-500">
-                    {m.description}
-                  </span>
+                <span className="font-display text-base font-semibold uppercase tracking-wide text-white group-hover:text-gold">
+                  {m.label}
                 </span>
               </Link>
             ))}
@@ -66,11 +60,10 @@ export default function Home() {
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-500">
-          Questions? Call{" "}
           <a href={`tel:${COMPANY.phone}`} className="font-semibold text-gold">
             {COMPANY.phone}
-          </a>
-          . A person answers.
+          </a>{" "}
+          — a person answers
         </p>
       </section>
 
@@ -85,15 +78,13 @@ export default function Home() {
           </h2>
           <div className="mt-10 space-y-6 sm:grid sm:grid-cols-3 sm:gap-6 sm:space-y-0">
             <HowStep number="01" title="Book online">
-              Pick what&apos;s going and your city. Takes about a minute.
+              Takes a minute.
             </HowStep>
-            <HowStep number="02" title="We confirm the day">
-              Exact date and price before you book. Text reminder the night
-              before if you want one.
+            <HowStep number="02" title="We confirm">
+              Date and price up front.
             </HowStep>
             <HowStep number="03" title="Set it out">
-              Curb by 6:30 AM ({BULK_PICKUP.itemsOutBy} for big items). We haul
-              it.
+              Curb by 6:30 AM ({BULK_PICKUP.itemsOutBy} big items).
             </HowStep>
           </div>
         </div>
@@ -106,9 +97,6 @@ export default function Home() {
           <h2 className="mt-1 text-center font-display text-3xl font-semibold uppercase text-white">
             No contract. Flat pricing.
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-center text-sm text-gray-400">
-            How we stack up against the national haulers:
-          </p>
 
           <div className="mt-8 overflow-hidden border border-gray-700">
             <div className="grid grid-cols-[1fr_1fr_1fr] border-b-2 border-gold/60 bg-charcoal px-4 py-3 font-display text-xs font-semibold uppercase tracking-[0.2em]">

@@ -184,9 +184,7 @@ export default function OnboardingWizard() {
           <h1 className="font-display text-4xl font-bold uppercase leading-none text-white">
             Set up trash service.
           </h1>
-          <p className="mt-2 text-gray-400">
-            Two minutes. Weekly pickup, recycling included.
-          </p>
+          <p className="mt-2 text-gray-400">Two minutes.</p>
           <div className="mt-5 space-y-3">
             {[
               ["doc", "No contracts. Leave anytime."],
@@ -262,9 +260,7 @@ export default function OnboardingWizard() {
           <h1 className="font-display text-3xl font-bold uppercase text-white">
             Pick your cart
           </h1>
-          <p className="mt-1 text-sm text-gray-400">
-            Recycling cart included with all of them. You can resize later.
-          </p>
+          <p className="mt-1 text-sm text-gray-400">Recycling included.</p>
           <div className="mt-5 space-y-3">
             {TRASH_PLANS.map((p) => (
               <button
@@ -329,7 +325,7 @@ export default function OnboardingWizard() {
             Who&apos;s on the account?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Add a second number and both of you can log in and order pickups.
+            Second number optional — both can log in.
           </p>
           <div className="mt-5 space-y-3">
             <input

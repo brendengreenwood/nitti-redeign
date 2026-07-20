@@ -182,21 +182,21 @@ export const YARD_WASTE_REJECTED = [
 export const TESTIMONIALS = [
   {
     quote:
-      "Good pricing, friendly service, and they're LOCAL. They really go above and beyond — picked up garbage on a Sunday after an ice storm when other haulers skipped the whole weekend.",
+      "Picked up garbage on a Sunday after an ice storm when other haulers skipped the whole weekend.",
     name: "Satisfied Customer",
     city: "Eagan",
     title: "Service You Can Count On",
   },
   {
     quote:
-      "They are the best and go above and beyond. Whenever people complain about their trash company on Nextdoor, Nitti comes up as the place to switch to.",
+      "Whenever people complain about their trash company on Nextdoor, Nitti comes up as the place to switch to.",
     name: "Loyal Customer",
     city: "Apple Valley",
     title: "Recommended by Neighbors",
   },
   {
     quote:
-      "Best price, reliable service, never a problem with extra bags. Office staff is great to work with — extra costs for special pickups are always reasonable.",
+      "Best price, reliable service, never a problem with extra bags.",
     name: "Long-time Customer",
     city: "Rosemount",
     title: "Best Price & Reliable",

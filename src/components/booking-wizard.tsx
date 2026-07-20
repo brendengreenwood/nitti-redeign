@@ -320,9 +320,6 @@ export default function BookingWizard() {
           <h1 className="font-display text-3xl font-bold uppercase text-white">
             What needs to go?
           </h1>
-          <p className="mt-1 text-sm text-gray-400">
-            Takes about a minute.
-          </p>
 
           <div className="mt-5 grid gap-2">
             {LIFE_MOMENTS.map((m) => (
@@ -400,9 +397,6 @@ export default function BookingWizard() {
           <h1 className="font-display text-3xl font-bold uppercase text-white">
             Where&apos;s home?
           </h1>
-          <p className="mt-1 text-sm text-gray-400">
-            We&apos;ll look up your pickup day.
-          </p>
           <div className="mt-6 grid grid-cols-2 gap-3">
             {SERVICE_CITIES.map((c) => (
               <button
@@ -435,8 +429,7 @@ export default function BookingWizard() {
             How many bags?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Compostable bags only, ${YARD_WASTE.onCallBagPrice} each. Rough
-            guess is fine — we count at the curb.
+            ${YARD_WASTE.onCallBagPrice}/bag. Rough guess is fine.
           </p>
 
           {!inSeason && (
@@ -489,8 +482,7 @@ export default function BookingWizard() {
             What&apos;s going?
           </h1>
           <p className="mt-1 text-sm text-gray-400">
-            Tap everything that applies. Prices are typical estimates — the
-            office confirms before pickup.
+            Estimates — office confirms final price.
           </p>
 
           <div className="mt-6 grid grid-cols-2 gap-3">
